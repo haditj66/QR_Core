@@ -1,0 +1,85 @@
+
+/*****************************************************************************
+** Includes
+*****************************************************************************/
+
+#ifdef ISForQT__ON
+#include <QApplication>
+#include "../include/MyQtHeaders/main_window.hpp"
+#endif
+
+
+#include "rclcpp/rclcpp.hpp"
+#include "@PROJECT_NAME@/@SINGLE_NODE_COMPOSED@.hpp"
+
+//put includes here
+##UserCode_a
+
+#include "QR_Core.h"
+#include "@PROJECT_NAME@/Config.hpp"
+
+
+
+QR_INIT
+
+
+
+using namespace @PROJECT_NAME@;
+
+
+
+
+/*****************************************************************************
+** Main
+*****************************************************************************/
+int main(int argc, char **argv) {
+
+    int result = 1;
+
+#ifdef ISForQT__ON
+    /*********************
+    ** Qt
+    **********************/
+
+    QApplication app(argc, argv);
+    QTStuff::MainWindow w(argc,argv);
+    w.setWindowTitle("name window here");
+    w.show();
+    result = app.exec();
+
+#else
+
+
+
+##UserCode_b
+
+    rclcpp::init(argc, argv);
+
+
+    rclcpp::executors::MultiThreadedExecutor exec;
+
+std::string fileSelect = argv[1] == nullptr ? "" : argv[1];
+    auto node =  QR_Core::Init_QR_Core<@PROJECT_NAME@::@SINGLE_NODE_COMPOSED@>(&exec,@PROJECT_NAME@::QRSettings, AO_NAME, fileSelect);
+
+
+
+##UserCode_c
+
+
+
+
+    QR_Print("%s started up!", AO_NAME.c_str());
+    exec.spin();
+
+
+
+    rclcpp::shutdown(); // should not return
+
+
+#endif
+
+
+
+    return result;
+
+}

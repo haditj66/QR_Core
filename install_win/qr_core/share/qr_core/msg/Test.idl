@@ -1,0 +1,12 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from qr_core/msg\Test.msg
+// generated code does not contain a copyright notice
+
+
+module qr_core {
+  module msg {
+    struct Test {
+      string blablas;
+    };
+  };
+};

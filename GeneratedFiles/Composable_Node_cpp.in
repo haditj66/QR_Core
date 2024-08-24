@@ -1,0 +1,89 @@
+/*****************************************************************************
+** Includes
+*****************************************************************************/
+
+#include "../include/@PROJECT_NAME@/@NAME_OF_NODE@.hpp"
+
+
+//place your includes here
+##UserCode_h
+
+/*****************************************************************************
+** Namespaces
+*****************************************************************************/
+//QT stuff
+#ifdef ISForQT__ON
+#include "../include/MyQtHeaders/main_window.hpp"
+#endif
+
+
+namespace @PROJECT_NAME@ {
+  using namespace std::chrono_literals;
+
+
+  /*****************************************************************************
+  ** Implementation
+  *****************************************************************************/
+
+  //constructor
+  @NAME_OF_NODE@::@NAME_OF_NODE@(const rclcpp::NodeOptions & options)
+      : Node("@NAME_OF_NODE@", options)
+  {
+
+    //place your own constructor stuff here.
+     ##UserCode_e
+
+
+      #ifdef ISForQT__ON
+      //MainWindow::UIStatic->SomeLabel->text("node has started");
+      #endif
+
+    /*********************
+    ** Publishers
+    **********************/
+    @PUBLISHER_CONSTRUCTOR_MP@
+
+
+    /*********************
+    ** Subscribers
+    **********************/
+    @SUBSCRIBER_CONSTRUCTOR_MP@
+
+
+    //*********************
+
+
+    //place your other constructor stuff here.
+    ##UserCode_f
+
+  }
+
+
+//place your implementations here
+##UserCode_g
+
+/*********************
+** Subscribers callback definitions
+**********************/
+@SUBSCRIBER_CALLBACK_DEFINITION_MP@
+//*********************
+
+
+
+  @NAME_OF_NODE@::~@NAME_OF_NODE@()
+  {
+    rclcpp::shutdown();
+  }
+
+
+
+
+
+
+
+}
+
+//this is needed for a composable node
+#include <rclcpp_components/register_node_macro.hpp>
+RCLCPP_COMPONENTS_REGISTER_NODE(@PROJECT_NAME@::@NAME_OF_NODE@)
+

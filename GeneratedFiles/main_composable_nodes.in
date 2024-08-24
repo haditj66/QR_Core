@@ -1,0 +1,66 @@
+/*****************************************************************************
+** Includes
+*****************************************************************************/
+
+#ifdef ISForQT__ON
+#include <QApplication>
+#include "../include/MyQtHeaders/main_window.hpp"
+#endif
+
+
+#include "rclcpp/rclcpp.hpp"
+@NODE_INCLUDE_MP@
+
+//place your includes here
+##UserCode_a
+
+/*****************************************************************************
+** Main
+*****************************************************************************/
+
+int main(int argc, char **argv) {
+
+    int result = 1;
+
+#ifdef ISForQT__ON
+    /*********************
+    ** Qt
+    **********************/
+
+    QApplication app(argc, argv);
+
+    
+    //place any of your initialization here 
+    ##UserCode_b
+    //QTStuff::MainWindow w(argc,argv);
+    //w.setWindowTitle("name window here");
+    //w.show();
+            
+    result = app.exec();
+    
+#else
+
+
+    ##UserCode_c
+
+    rclcpp::init(argc, argv);
+
+    rclcpp::executors::MultiThreadedExecutor exec;
+    rclcpp::NodeOptions options;
+    options.use_intra_process_comms(true);
+
+    @NODE_CREATION_MP@
+
+
+    ##UserCode_d
+
+     exec.spin();
+
+
+#endif
+
+    ##UserCode_e
+
+    return result;
+
+}

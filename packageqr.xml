@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+
+<!--Generated file!! from the package.in file. if you want to modify this file, define the following cmake variables
+PACKAGE_USER_SECTION1
+PACKAGE_USER_SECTION2
+PACKAGE_USER_SECTION3-->
+
+
+<package format="3">
+  <name>qr_core</name>
+  <version>0.0.1</version>
+  <description>
+     
+  </description>
+  <maintainer email=""></maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+  <!--sssvsQT--> 
+
+
+<!--ROS2 INTERFACE DEPENDENCIES-->
+
+         
+
+         
+
+<!--PACKAGE_USER_SECTION1: define this variable in cmake to have user code written here.-->
+
+
+
+<!--QT-->
+<build_depend>qtbase5-dev</build_depend>
+
+
+<!--PACKAGE_USER_SECTION2: define this variable in cmake to have user code written here.-->
+
+
+
+
+<!--ROS2 DEPENDENCIES-->
+<depend>rclcpp</depend>
+ <depend>rclcpp_components</depend>
+        
+
+
+<!--stuff for QT-->
+<exec_depend>libqt5-core</exec_depend>
+<exec_depend>libqt5-gui</exec_depend>
+<exec_depend>libqt5-widgets</exec_depend>
+
+<member_of_group>rosidl_interface_packages</member_of_group>
+
+<export>
+    <build_type>ament_cmake</build_type>
+
+<!--PACKAGE_USER_SECTION3: define this variable in cmake to have user code written here.-->
+
+
+
+</export>
+
+</package>

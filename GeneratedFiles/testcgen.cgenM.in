@@ -1,0 +1,112 @@
+##Macro1 @Macro1@
+##Macro2 @Macro2@
+##Macro3 @Macro3@
+##Macro4 @Macro4@
+##Macro5 @Macro5@
+##Macro6 @Macro6@
+##Macro7 @Macro7@
+##Macro8 @Macro8@
+##Macro9 @Macro9@
+##Macro10 @Macro10@
+##Macro11 @Macro11@
+##Macro12 @Macro12@
+##Macro13 @Macro13@
+##Macro14 @Macro14@
+##Macro15 @Macro15@
+##Macro16 @Macro16@
+##Macro17 @Macro17@
+##Macro18 @Macro18@
+##Macro19 @Macro19@
+##Macro20 @Macro20@
+##Macro21 @Macro21@
+##Macro22 @Macro22@
+##Macro23 @Macro23@
+##Macro24 @Macro24@
+##Macro25 @Macro25@
+##Macro26 @Macro26@
+##Macro27 @Macro27@
+##Macro28 @Macro28@
+##Macro29 @Macro29@
+##Macro30 @Macro30@
+##Macro31 @Macro31@
+##Macro32 @Macro32@
+##Macro33 @Macro33@
+##Macro34 @Macro34@
+##Macro35 @Macro35@
+##Macro36 @Macro36@
+##Macro37 @Macro37@
+##Macro38 @Macro38@
+##Macro39 @Macro39@
+##Macro40 @Macro40@
+##Macro41 @Macro41@
+##Macro42 @Macro42@
+##Macro43 @Macro43@
+##Macro44 @Macro44@
+##Macro45 @Macro45@
+##Macro46 @Macro46@
+##Macro47 @Macro47@
+##Macro48 @Macro48@
+##Macro49 @Macro49@
+##Macro50 @Macro50@
+
+##LoopIncrement1 @LoopIncrement1@
+##LoopIncrement2 @LoopIncrement2@
+##LoopIncrement3 @LoopIncrement3@
+##LoopIncrement4 @LoopIncrement4@
+##LoopIncrement5 @LoopIncrement5@
+##LoopIncrement6 @LoopIncrement6@
+##LoopIncrement7 @LoopIncrement7@
+##LoopIncrement8 @LoopIncrement8@
+##LoopIncrement9 @LoopIncrement9@
+##LoopIncrement10 @LoopIncrement10@
+
+##ToFile @_arg_OUTPUT_FILE_NAME@@_arg_OUTPUT_FILE_EXTENSION@
+
+//includes
+#include "AETimerSimple.h"
+
+##UserCode_f
+
+
+AETimerSimple::AETimerSimple(uint32_t periodOfTimerTicksInMilli, bool autoReload,TimerSimpleCallback_t timerSimpleCallback)
+{
+TimerSimpleCallback = timerSimpleCallback
+PeriodOfTimerTicksInMilli = periodOfTimerTicksInMilli
+AutoReload = autoReload
+
+##UserCode_a
+
+    //always stop the timer
+    StopTimer()
+
+}
+
+
+
+void AETimerSimple::StartTimer(){
+    ##UserCode_b
+}
+
+
+void AETimerSimple::StopTimer(){
+    ##UserCode_c
+}
+
+void AETimerSimple::PauseTimer(){
+    ##UserCode_d
+}
+
+bool AETimerSimple::IsTimerActive(){
+    ##UserCode_e
+}
+
+
+void AETimerSimple::ChangePeriod(uint32_t newPeriod){
+    ##UserCode_g
+}
+
+uint32_t AETimerSimple::GetPeriodOfTimer()  const {
+    ##UserCode_h
+}
+
+

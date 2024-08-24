@@ -1,0 +1,14 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from qr_core/msg/VoidInt64Changed.msg
+// generated code does not contain a copyright notice
+
+
+module qr_core {
+  module msg {
+    struct VoidInt64Changed {
+      uint64 id;
+
+      int64 data;
+    };
+  };
+};

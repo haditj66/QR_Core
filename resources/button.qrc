@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/roscoreOK.png</file>
+        <file>images/roscoreBAD.png</file>
+    </qresource>
+</RCC>

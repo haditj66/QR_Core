@@ -1,0 +1,118 @@
+##Macro1 @_arg_Macro1@
+##Macro2 @_arg_Macro2@
+##Macro3 @_arg_Macro3@
+##Macro4 @_arg_Macro4@
+##Macro5 @_arg_Macro5@
+##Macro6 @_arg_Macro6@
+##Macro7 @_arg_Macro7@
+##Macro8 @_arg_Macro8@
+##Macro9 @_arg_Macro9@
+##Macro10 @_arg_Macro10@
+##Macro11 @_arg_Macro11@
+##Macro12 @_arg_Macro12@
+##Macro13 @_arg_Macro13@
+##Macro14 @_arg_Macro14@
+##Macro15 @_arg_Macro15@
+##Macro16 @_arg_Macro16@
+##Macro17 @_arg_Macro17@
+##Macro18 @_arg_Macro18@
+##Macro19 @_arg_Macro19@
+##Macro20 @_arg_Macro20@
+##Macro21 @_arg_Macro21@
+##Macro22 @_arg_Macro22@
+##Macro23 @_arg_Macro23@
+##Macro24 @_arg_Macro24@
+##Macro25 @_arg_Macro25@
+##Macro26 @_arg_Macro26@
+##Macro27 @_arg_Macro27@
+##Macro28 @_arg_Macro28@
+##Macro29 @_arg_Macro29@
+##Macro30 @_arg_Macro30@
+##Macro31 @_arg_Macro31@
+##Macro32 @_arg_Macro32@
+##Macro33 @_arg_Macro33@
+##Macro34 @_arg_Macro34@
+##Macro35 @_arg_Macro35@
+##Macro36 @_arg_Macro36@
+##Macro37 @_arg_Macro37@
+##Macro38 @_arg_Macro38@
+##Macro39 @_arg_Macro39@
+##Macro40 @_arg_Macro40@
+##Macro41 @_arg_Macro41@
+##Macro42 @_arg_Macro42@
+##Macro43 @_arg_Macro43@
+##Macro44 @_arg_Macro44@
+##Macro45 @_arg_Macro45@
+##Macro46 @_arg_Macro46@
+##Macro47 @_arg_Macro47@
+##Macro48 @_arg_Macro48@
+##Macro49 @_arg_Macro49@
+##Macro50 @_arg_Macro50@
+
+##LoopIncrement1 @_arg_LoopIncrement1@
+##LoopIncrement2 @_arg_LoopIncrement2@
+##LoopIncrement3 @_arg_LoopIncrement3@
+##LoopIncrement4 @_arg_LoopIncrement4@
+##LoopIncrement5 @_arg_LoopIncrement5@
+##LoopIncrement6 @_arg_LoopIncrement6@
+##LoopIncrement7 @_arg_LoopIncrement7@
+##LoopIncrement8 @_arg_LoopIncrement8@
+##LoopIncrement9 @_arg_LoopIncrement9@
+##LoopIncrement10 @_arg_LoopIncrement10@
+
+##ToFile @_arg_OUTPUT_FILE_NAME@@_arg_OUTPUT_FILE_EXTENSION@
+//*************DONT MODIFY THIS FILE HERE ******************************
+// this is a generated file from cmake's configure_file() command.
+//template for this file should be located in GeneratedFiles foldersss
+
+#pragma once
+
+
+#include "@PROJECT_NAME@/visibility_control.h"
+
+#define PROJECT_NAME @PROJECT_NAME@
+
+
+#include <string>
+
+#include <cereal/archives/xml.hpp>
+#include <cereal/archives/json.hpp>
+
+
+##UserCode_c
+
+namespace @PROJECT_NAME@ {
+
+
+class QR_Settings
+{
+public:
+  std::string id;
+
+  //put the variables you want to have as settings
+  //for example
+  //int size1;
+  //std:string someothersetting
+  ##UserCode_a
+
+  // This method lets cereal know which data members to serialize.
+  template<class Archive>
+  void serialize(Archive & archive)
+  {
+
+    //you need to now set these variables in the archive. For example
+    //for example:
+    //archive(CEREAL_NVP(id),CEREAL_NVP(size1), CEREAL_NVP(someothersetting));
+    ##UserCode_b
+
+  }
+};
+
+
+##UserCode_d
+
+
+extern QR_Settings QRSettings;
+
+}
+

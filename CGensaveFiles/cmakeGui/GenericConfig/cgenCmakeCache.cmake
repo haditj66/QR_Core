@@ -1,0 +1,5 @@
+set(IsThisForQt FALSE)
+add_compile_definitions(IsThisForQt__${IsThisForQt})
+set(IsThisForNodes NotComposable)
+add_compile_definitions(IsThisForNodes__${IsThisForNodes})
+add_compile_definitions(CGEN_ALLOPTIONS="@IsThisForQt::FALSE @IsThisForNodes::NotComposable ")

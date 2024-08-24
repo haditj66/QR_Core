@@ -1,0 +1,19 @@
+# QtCreator CMake
+CMakeLists.txt.user*
+
+### VisualStudioCode ###
+# exclude everything
+.vscode/*
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+**/.history
+
+# Ignore all log and build
+build*/
+log*/
+rosqt/build*/
+rosqt/log*/
+rosqt/IF/build*/
+rosqt/IF/log*/
+

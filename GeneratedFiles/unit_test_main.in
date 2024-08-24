@@ -1,0 +1,23 @@
+
+ //put all your includes for the tests here manually. If you dont want a test, comment it out.
+##UserCode_a
+
+
+ #include "gtest/gtest.h"
+ 
+// floating point comparisons.
+//EXPECT_FLOAT_EQ (expected, actual)
+//EXPECT_DOUBLE_EQ (expected, actual)
+//EXPECT_NEAR (expected, actual, absolute_range)
+
+//strings
+// EXPECT_STREQ("h", "h");
+
+
+
+
+int main(int argc, char** argv)
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

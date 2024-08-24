@@ -1,0 +1,106 @@
+#pragma once
+
+
+/*****************************************************************************
+** Includes a
+*****************************************************************************/
+
+#ifdef ISForQT__ON
+//*******DONT INCLUDE THIS!! this will cause some circular dependency with undefined behaviours and bugs
+//#include "../include/MyQtHeaders/main_window.hpp"
+#include "ui_main_window.h"
+#include <QMainWindow>
+#endif
+
+#include "Config.hpp"
+
+//ROS2
+#include "rclcpp/rclcpp.hpp"
+//#include "nav_msgs/msg/odometry.hpp"
+//#include "image_transport/image_transport.hpp"
+//#include "geometry_msgs/msg/twist.hpp"
+#include "std_msgs/msg/string.hpp"
+
+//*********************
+//** Type headers
+//**********************
+@PUBLISHER_HEADER_MP@
+
+@SUBSCRIBER_TYPE_HEADER_MP@
+
+//CPP
+#include <chrono>
+#include <memory>
+#include <functional>
+#include <string>
+
+
+//place any of your headers here
+##UserCode_a
+
+
+
+/*****************************************************************************
+** Namespaces
+*****************************************************************************/
+
+namespace @PROJECT_NAME@ {
+using std::placeholders::_1;
+
+
+  /*****************************************************************************
+  ** Class
+  *****************************************************************************/
+  class @NAME_OF_NODE@ : public rclcpp::Node
+  {
+  public:
+
+
+      COMPOSITION_PUBLIC
+      explicit @NAME_OF_NODE@ (const rclcpp::NodeOptions & options);
+
+      //MyNode();
+      virtual ~@NAME_OF_NODE@ ();
+
+
+      //place any public member variables/functions here
+      ##UserCode_b
+
+
+  private:
+
+
+      /*********************
+      ** Publishers
+      **********************/
+      @PUBLISHER_MP@
+
+      /*********************
+      ** Subscribers
+      **********************/
+      @SUBSCRIBER_MP@
+
+
+      //*********************
+
+
+      /*********************
+      ** Subscriber callback declarations
+      **********************/
+       @SUBSCRIBER_CALLBACK_DECLARATION_MP@
+
+       //*********************
+
+
+       //place any private  member variables/functions here
+       ##UserCode_c
+
+  };
+
+
+
+
+      ##UserCode_d
+
+
+} // namespace

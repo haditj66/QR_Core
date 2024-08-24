@@ -1,0 +1,174 @@
+##############################################################################
+# PROJECT This cmake file is for this qr_core project. It does NOT  run when other projects link to this project!
+##############################################################################
+
+cmake_minimum_required(VERSION 3.5)
+project(qr_core NONE)
+
+set(QR_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Templates.cmake)
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/MultiParameterTemplate.cmake)
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Core.cmake)
+
+
+message("CMAKE_BINARY_DIR 9999999999999999999999  ${CMAKE_BINARY_DIR}")
+
+#include("cmake/MyCmakeHelpers.cmake")
+
+#option(ISForQT "is this for QT or for a bare ROS project." FALSE)
+#add_compile_definitions(ISForQT__${ISForQT})
+
+if(WIN32)
+    set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/win)
+else()
+    set(CMAKE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/lin)
+endif()
+
+
+set(CMAKE_BUILD_TYPE "Debug")
+if (WIN32)
+
+
+    set(CODEGENGUI_PATH "C:/CodeGenerator/CgenCmakeGui")
+    FILE(READ "${CODEGENGUI_PATH}/CgenCmakeConfigFunctions.cmake" contentsOut)
+    FILE(WRITE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/CgenCmakeConfigFunctions.cmake" ${contentsOut})
+endif()
+#endif()
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CgenCmakeConfigFunctions.cmake")
+Cgen_Start(
+    CGEN_DIRECTORY_OF_CACHE "GenericConfig"
+    )
+
+
+
+Cgen_Option(
+        NAME IsThisForQt
+        DESCRIPTION "is this for Qt"
+        POSSIBLEVALUES TRUE FALSE
+        CONSTRICTS_LATER_OPTIONS
+)
+
+
+Cgen_Option(
+        NAME IsThisForNodes
+        DESCRIPTION "is this for nodes"
+        POSSIBLEVALUES Composable NotComposable
+        CONSTRICTS_LATER_OPTIONS
+)
+
+
+
+
+#in order to generate the qr_cmake_autos file, I need to know the directory of QR_CORE_DIR . I need
+#to know it for both windows and linux. However I cannot overwrite the linux location when running
+#in windows and vice versa. So I need a location to put the location in case the other OS already set it.
+#--------------------------------------------------------------------------------------------------------------------------
+if(WIN32)
+    QR_Generate_File(
+           WORKINGDIRECTORYOFINPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}
+           WORKINGDIRECTORYOFOUTPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+           INPUT_FILE_NAME QR_Location_Win
+           OUTPUT_FILE_NAME QR_Location_Win
+           OUTPUT_FILE_EXTENSION cmake
+    )
+else()
+
+    QR_Generate_File(
+           WORKINGDIRECTORYOFINPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}
+           WORKINGDIRECTORYOFOUTPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+           INPUT_FILE_NAME QR_Location_Lin
+           OUTPUT_FILE_NAME QR_Location_Lin
+           OUTPUT_FILE_EXTENSION cmake
+    )
+
+endif()
+
+
+
+#qrcore_dir should depend on the install directory. which for ament is
+# install/${PROJECT_NAME}
+# I think ament requires you to make it share/${PROJECT_NAME}
+set(INSTALL_DIR share/${PROJECT_NAME})
+
+
+set(QR_CORE_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/install/${PROJECT_NAME}/${INSTALL_DIR})
+
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Location_Win.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Location_Win.cmake)
+
+    #append the install directory as this is what depending packages will use
+    #set(QR_CORE_DIR_WIN ${QR_CORE_DIR_WIN}/${INSTALL_DIR_FINAL})
+else()
+    set(QR_CORE_DIR_WIN)
+endif()
+
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Location_Lin.cmake)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/QR_Location_Lin.cmake)
+
+    #append the install directory as this is what depending packages will use
+    #set(QR_CORE_DIR_LIN ${QR_CORE_DIR_LIN}/${INSTALL_DIR_FINAL})
+else()
+    set(QR_CORE_DIR_LIN)
+endif()
+
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles/qr_cmake_autos.in
+        ${CMAKE_CURRENT_SOURCE_DIR}/qr_cmake_autos.cmake @ONLY)
+
+#QR_Generate_File(
+#       WORKINGDIRECTORYOFINPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}
+#       WORKINGDIRECTORYOFOUTPUTFILE ${CMAKE_CURRENT_SOURCE_DIR}
+#       INPUT_FILE_NAME qr_cmake_autos
+#       OUTPUT_FILE_NAME qr_cmake_autos
+#       OUTPUT_FILE_EXTENSION cmake
+#)
+#--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+#generate the Config file from the generated files folder for Config.in.
+
+
+
+
+set(ROS2_DEPENDENCIES
+        )
+    find_package(ament_cmake REQUIRED)
+    find_package(ament_cmake_auto REQUIRED)
+    find_package(ament_cmake_ros REQUIRED)
+
+
+#if(${ISForQT} STREQUAL "ON" )
+#    find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED) #Ejemplo para QWidget
+#endif()
+
+# Find ROS2 dependencies
+foreach(pkg ${ROS2_DEPENDENCIES})
+  find_package(${pkg} REQUIRED)
+endforeach()
+
+
+
+
+
+
+ament_package(
+  CONFIG_EXTRAS "qr_cmake_autos.cmake"
+)
+
+install(
+  DIRECTORY cmake
+  DESTINATION ${INSTALL_DIR}
+)
+
+Cgen_End()
+
+#ament_package()

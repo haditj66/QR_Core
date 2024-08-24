@@ -1,0 +1,15 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from qr_core/srv/VoidInt.srv
+// generated code does not contain a copyright notice
+
+
+module qr_core {
+  module srv {
+    struct VoidInt_Request {
+      int32 arg1;
+    };
+    struct VoidInt_Response {
+      uint8 structure_needs_at_least_one_member;
+    };
+  };
+};

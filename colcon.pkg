@@ -1,0 +1,6 @@
+{
+    "build": { 
+        "build-base": "build/col/win",
+        "install-base": "install/win" 
+    }
+}

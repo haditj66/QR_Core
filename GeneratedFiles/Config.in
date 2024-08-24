@@ -1,0 +1,33 @@
+//*************DONT MODIFY THIS FILE HERE ******************************
+// this is a generated file from cmake's configure_file() command.
+//template for this file should be located in GeneratedFiles foldersss
+
+#pragma once
+
+
+
+
+#define PROJECT_NAME @PROJECT_NAME@
+
+
+#include <string>
+
+#include <cereal/archives/xml.hpp>
+#include <cereal/archives/json.hpp>
+
+
+##UserCode_c
+
+namespace @PROJECT_NAME@ {
+
+@SETTINGS_MP@
+
+
+##UserCode_d
+
+#ifdef ROS2_PROJECT
+extern QR_Settings QRSettings;
+#endif
+
+}
+

@@ -1,0 +1,15 @@
+//*************DONT MODIFY THIS FILE HERE ******************************
+// this is a generated file  
+
+
+if(WIN32)
+
+ set(QR_CORE_DIR_WIN @CMAKE_CURRENT_SOURCE_DIR@)
+
+else()
+
+ set(QR_CORE_DIR_LIN @CMAKE_CURRENT_SOURCE_DIR@)
+
+endif()
+
+

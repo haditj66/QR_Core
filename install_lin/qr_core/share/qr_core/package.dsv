@@ -1,0 +1,14 @@
+source;share/qr_core/hook/cmake_prefix_path.ps1
+source;share/qr_core/hook/cmake_prefix_path.dsv
+source;share/qr_core/hook/cmake_prefix_path.sh
+source;share/qr_core/hook/ld_library_path_lib.ps1
+source;share/qr_core/hook/ld_library_path_lib.dsv
+source;share/qr_core/hook/ld_library_path_lib.sh
+source;share/qr_core/hook/pythonpath.ps1
+source;share/qr_core/hook/pythonpath.dsv
+source;share/qr_core/hook/pythonpath.sh
+source;share/qr_core/local_setup.bash
+source;share/qr_core/local_setup.dsv
+source;share/qr_core/local_setup.ps1
+source;share/qr_core/local_setup.sh
+source;share/qr_core/local_setup.zsh

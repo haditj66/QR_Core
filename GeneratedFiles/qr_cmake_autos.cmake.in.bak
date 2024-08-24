@@ -1,0 +1,6 @@
+//*************DONT MODIFY THIS FILE HERE ******************************
+// this is a generated file  
+
+
+
+set(QR_CORE_DIR @CMAKE_CURRENT_SOURCE_DIR@) 
