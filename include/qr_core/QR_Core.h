@@ -3,7 +3,10 @@
 
 #include "QR_Print.h"
 #include "QR_rand.h"
+
+#ifdef ROS2_PROJECT
 #include "QR_Ticket.h"
+#endif
 #include "QR_DataSyncing.h"
 #include "QR_Utils.h"
 
@@ -197,6 +200,7 @@ public:
 
 	}
 
+    #ifdef ROS2_PROJECT
     template<class AONodeType >
     static std::shared_ptr<AONodeType> CreateNode(rclcpp::executors::MultiThreadedExecutor* exec, std::string aoTheName)
     {
@@ -211,7 +215,7 @@ public:
 
          return node;
     }
-
+    #endif
 
 
 private:

@@ -38,8 +38,8 @@ if(WIN32)
 
     include(${QR_CORE_DIR}/cmake/QR_Templates.cmake)
 else()
-    set(QR_CORE_DIR /home/luci/QR_Sync/QR_Core)
-    set(QR_CORE_INSTALL_DIR /home/luci/QR_Sync/QR_Core/install_lin/qr_core/share/qr_core)
+    set(QR_CORE_DIR /home/hadi/QR_Sync/QR_Core)
+    set(QR_CORE_INSTALL_DIR /home/hadi/QR_Sync/QR_Core/install_lin/qr_core/share/qr_core)
 
     #set(CMAKE_CURRENT_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/linux)
 endif()

@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "qr_core/msg/Test",
+      "fields": [
+        {
+          "name": "blablas",
+          "type": {
+            "type_id": 17,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "qr_core/msg/Test",
+      "hash_string": "RIHS01_df26db3148203900563cbc53a85efeace0dfebb1161866c74aaeffe59d9a1b6c"
+    }
+  ]
+}

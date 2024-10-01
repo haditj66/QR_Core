@@ -228,7 +228,7 @@ macro(QR_add_subscriber_to_node)
 //the callback for subscription to topic ${TOPIC_NAME_OF_EVENT}
 void ${NAME_OF_NODE}::${NAME_OF_CALLBACK}(const ${TYPE_OF_EVENT}::SharedPtr msg) const
 {
-##UserCode
+##UserCode_${NAME_OF_CALLBACK}
     //RCLCPP_INFO(this->get_logger(), "" ${NAME_OF_NODE} has received the ${TOPIC_NAME_OF_EVENT} published message: '%s'"", msg->data.c_str());
 } \n\n"
         )

@@ -20,8 +20,8 @@ extern std::string AO_NAME;
 
 
 
-///DataAccessManagerNode. This node will be used to manage dataaccess calls like service callbacks for Setposx
-///for the REAL AO. and also surrogate changes like subscribtion to Rock1/posxChanged
+///DataAccessManagerNode. This node will be used to manage data property calls by using service callbacks for things like get and set.
+///This node will basically create service clients for AO surrogates to call get and sets of their data.
   class DataAccessManagerNode : public rclcpp::Node
   {
   public:

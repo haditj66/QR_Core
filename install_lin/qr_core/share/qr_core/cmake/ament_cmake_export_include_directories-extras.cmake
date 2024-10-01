@@ -1,6 +1,6 @@
 # generated from ament_cmake_export_include_directories/cmake/ament_cmake_export_include_directories-extras.cmake.in
 
-set(_exported_include_dirs "${qr_core_DIR}/../../../include")
+set(_exported_include_dirs "${qr_core_DIR}/../../../include/qr_core")
 
 # append include directories to qr_core_INCLUDE_DIRS
 # warn about not existing paths

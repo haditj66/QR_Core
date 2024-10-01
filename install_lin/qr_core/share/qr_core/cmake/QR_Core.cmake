@@ -134,8 +134,8 @@ macro(QR_project)
 #            OUTPUT_FILE_EXTENSION hpp
 #    )
 
-set(AO_TO_SET ${AO_TO_SET} AllSurrogates)#NoAODesignPattern)
-set(AO_TO_SET ${AO_TO_SET} AllRealAO)
+# set(AO_TO_SET ${AO_TO_SET} AllSurrogates)#NoAODesignPattern)
+# set(AO_TO_SET ${AO_TO_SET} AllRealAO)
 
 if(QR_PROJECT_TYPE STREQUAL "INTERFACE")
 else()

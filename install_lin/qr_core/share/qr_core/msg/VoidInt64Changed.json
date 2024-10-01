@@ -1,0 +1,36 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "qr_core/msg/VoidInt64Changed",
+      "fields": [
+        {
+          "name": "id",
+          "type": {
+            "type_id": 9,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "data",
+          "type": {
+            "type_id": 8,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "qr_core/msg/VoidInt64Changed",
+      "hash_string": "RIHS01_619713367c2063183fab73425b7e8a98a4f3181d1bc422b21b078880826e5583"
+    }
+  ]
+}
