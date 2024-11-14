@@ -103,7 +103,7 @@ macro(IsALINK)
         set(MODULE_EXTENSION _rqt)
         #special case for FROM_TYPE "ROSIntegration"  TO_TYPE "ROSLibrary" as you need to take into account the FOR_REAL_AO
         if(FROM_TYPE STREQUAL "ROSIntegration" AND TO_TYPE STREQUAL "ROSLibrary")
-            set(TO_TARGET_FULL_NAME ${TO_TARGET_FULL_NAME}_${_arg_FOR_REAL_AO})
+            set(TO_TARGET_FULL_NAME ${TO_TARGET_FULL_NAME})#_${_arg_FOR_REAL_AO}) dont add this feature
         endif()
 
 

@@ -1,7 +1,11 @@
 msg/Test.idl
 msg/Test.msg
+msg/VoidInt32Changed.idl
+msg/VoidInt32Changed.msg
 msg/VoidInt64Changed.idl
 msg/VoidInt64Changed.msg
+srv/Int32Int32.idl
+srv/Int32Int32.srv
 srv/Int64Int64.idl
 srv/Int64Int64.srv
 srv/VoidInt.idl

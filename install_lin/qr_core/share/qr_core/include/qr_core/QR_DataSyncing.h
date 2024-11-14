@@ -42,21 +42,21 @@ public:
     //group for all datasync objects in it.
     DataSyncing(std::string id,std::string nameOfData, TData* dataToChange, rclcpp::CallbackGroup::SharedPtr callbackGroupForSurrogate) : DataToChange(dataToChange){
 
-//        subscription_datachanged = AOGlobalNode->create_subscription<TDataChanged>
-//                        (id + "/"+ nameOfData + "DataChanged", 10, std::bind(&DataSyncing<TData,  TDataChanged, TDataChangedSub>::datachanged_Callback, this,_1));
-//        subscriptionInitialized = AOGlobalNode->create_subscription<world_i::msg::GameobjectData>
-//                ("/GameobjectInitialized", 10, std::bind(&GameobjectInit::GameobjectInitialized_Callback,this, _1));
+        //        subscription_datachanged = AOGlobalNode->create_subscription<TDataChanged>
+        //                        (id + "/"+ nameOfData + "DataChanged", 10, std::bind(&DataSyncing<TData,  TDataChanged, TDataChangedSub>::datachanged_Callback, this,_1));
+        //        subscriptionInitialized = AOGlobalNode->create_subscription<world_i::msg::GameobjectData>
+        //                ("/GameobjectInitialized", 10, std::bind(&GameobjectInit::GameobjectInitialized_Callback,this, _1));
 
         this->Id = id;
 
         Datasync_cb_group = callbackGroupForSurrogate;//AOGlobalNode->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
         rclcpp::SubscriptionOptions options;
         options.callback_group = Datasync_cb_group;
-         subscription_datachanged = TheDataAccessManagerNode->create_subscription<TDataChangedSub>
-                        (id + "/"+ nameOfData + "DataChanged", 10,
-                         std::bind(&DataSyncing<TData,  TDataChanged, TDataChangedSub>::datachanged_Callback, this,_1), options);
+        subscription_datachanged = TheDataAccessManagerNode->create_subscription<TDataChangedSub>
+                                   (id + "/"+ nameOfData + "DataChanged", 10,
+                                    std::bind(&DataSyncing<TData,  TDataChanged, TDataChangedSub>::datachanged_Callback, this,_1), options);
 
-         TicketForData = nullptr;
+        TicketForData = nullptr;
     }
 
     void datachanged_Callback(const DataChangedCall msg)//(const DataChangedCall msg)
@@ -76,12 +76,12 @@ public:
         //regardless on whether the data change was from the ticket request, I still need to change the surrogate's internal data.
         //This is the ONLY place where this can happen, so no need for a mutex.
         *DataToChange = msg->data;
-  //      int64_t s = msg->data;
+        //      int64_t s = msg->data;
     }
 
-    Ticket<DataChanged, void>*
-    //Ticket<std::shared_future<rclcpp::Client<qr_core::srv::Int64Int64>::SharedResponse>, void>*
-    TicketForData;
+    TicketFuture<DataChanged, void>*
+        //Ticket<std::shared_future<rclcpp::Client<qr_core::srv::Int64Int64>::SharedResponse>, void>*
+        TicketForData;
 
 
     std::mutex MutexForData;

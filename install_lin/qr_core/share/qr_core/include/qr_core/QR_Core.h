@@ -3,11 +3,12 @@
 
 #include "QR_Print.h"
 #include "QR_rand.h"
-#include "QR_Ticket.h"
+ 
+#include "QR_Ticket.h" 
 #include "QR_DataSyncing.h"
 #include "QR_Utils.h"
 
-#include "QR_AO.h""
+#include "QR_AO.h"
 
 #include "visibility_control.h"
 
@@ -197,6 +198,7 @@ public:
 
 	}
 
+    #ifdef ROS2_PROJECT
     template<class AONodeType >
     static std::shared_ptr<AONodeType> CreateNode(rclcpp::executors::MultiThreadedExecutor* exec, std::string aoTheName)
     {
@@ -204,14 +206,15 @@ public:
         auto node =
           std::make_shared<AONodeType>(rclcpp::NodeOptions());
         exec->add_node(node);
+        #ifndef AllSurrogates
+                 AOGlobalNode = (rclcpp::Node*)node->ForNode;
+        #endif
 
-#ifndef AllSurrogates
-        AOGlobalNode = (rclcpp::Node*)node->ForNode;
-#endif
+
 
          return node;
     }
-
+    #endif
 
 
 private:

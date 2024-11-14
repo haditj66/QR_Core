@@ -26,24 +26,41 @@ extern rclcpp::Node* TheNodeForAllSurrogates;
 
 //solution given by
 //https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
-static std::string string_format(const std::string fmt_str, ...) {
-    int final_n, n = ((int)fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
-    std::unique_ptr<char[]> formatted;
-    va_list ap;
-    while(1) {
-        formatted.reset(new char[n]); /* Wrap the plain char array into the unique_ptr */
-        strcpy(&formatted[0], fmt_str.c_str());
-        va_start(ap, fmt_str);
-        final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
-        va_end(ap);
-        if (final_n < 0 || final_n >= n)
-            n += abs(final_n - n + 1);
-        else
-            break;
-    }
-    return std::string(formatted.get());
-}
+// static std::string string_format(const std::string fmt_str, ...) {
+//     int final_n, n = ((int)fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
+//     std::unique_ptr<char[]> formatted;
+//     va_list ap;
+//     while(1) {
+//         formatted.reset(new char[n]); /* Wrap the plain char array into the unique_ptr */
+//         strcpy(&formatted[0], fmt_str.c_str());
+//         va_start(ap, fmt_str);
+//         final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
+//         va_end(ap);
+//         if (final_n < 0 || final_n >= n)
+//             n += abs(final_n - n + 1);
+//         else
+//             break;
+//     }
+//     return std::string(formatted.get());
+// }
 
+
+static std::string string_format(const char* format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    // Estimate the size of the formatted string
+    size_t size = vsnprintf(nullptr, 0, format, args) + 1;  // +1 for '\0'
+    va_end(args);
+
+    std::unique_ptr<char[]> buffer(new char[size]);
+
+    va_start(args, format);
+    vsnprintf(buffer.get(), size, format, args);
+    va_end(args);
+
+    return std::string(buffer.get(), buffer.get() + size - 1);  // Exclude the '\0'
+}
 
 static void _QR_Print(const char* msg)
 {
@@ -68,6 +85,23 @@ static void _QR_Print(const char* msg)
     #endif
 }
 
+#ifdef ROS2_PROJECT
+static void _QR_Print_Node(rclcpp::Node* nodeToUse, const char* msg)
+{
+    if(nodeToUse != nullptr)
+    {
+        RCLCPP_INFO(nodeToUse->get_logger(),msg);// msg,lst);
+    }
+}
+
+#define QR_Print_Node(...) \
+{\
+        std::string out = string_format(__VA_ARGS__);\
+        _QR_Print_Node(this->ForNode, out.c_str());\
+}
+
+
+#endif
 
 //const std::string&
 //static void QR_Print2(const char* msg, ...)

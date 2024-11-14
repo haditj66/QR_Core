@@ -348,7 +348,7 @@ set(errorVar)
     message("running cgen macro at directory ${_arg_OUTPUT_DIRECTORY}")
 
 	if (WIN32)
-            execute_process(COMMAND  dotnet C:/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro ${_arg_OUTPUT_FILE_NAME}
+	    execute_process(COMMAND  dotnet C:/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro
             WORKING_DIRECTORY ${_arg_OUTPUT_DIRECTORY}
             OUTPUT_VARIABLE outVar 
             ERROR_VARIABLE errorVar)
@@ -356,7 +356,7 @@ set(errorVar)
 			message("outVar: ${outVar}")
 			message("errorVar: ${errorVar}")
 	else()
-                    execute_process(COMMAND  dotnet /home/${USERNAME}/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro ${_arg_OUTPUT_FILE_NAME}
+		    execute_process(COMMAND  dotnet /home/${USERNAME}/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro
             WORKING_DIRECTORY ${_arg_OUTPUT_DIRECTORY}
             OUTPUT_VARIABLE outVar 
             ERROR_VARIABLE errorVar)
@@ -368,10 +368,10 @@ set(errorVar)
     #run cgen macro in this directory to generate the cmake generated file
 
              
-if(NOT EXISTS "${_arg_OUTPUT_DIRECTORY}/${_arg_OUTPUT_FILE_NAME}${_arg_OUTPUT_FILE_EXTENSION}")
+if(NOT EXISTS "${_arg_OUTPUT_DIRECTORY}/${_arg_OUTPUT_FILE_NAME}.${_arg_OUTPUT_FILE_EXTENSION}")
 
 	 if (WIN32)
-             execute_process(COMMAND  dotnet C:/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro ${_arg_OUTPUT_FILE_NAME}
+	     execute_process(COMMAND  dotnet C:/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro
              WORKING_DIRECTORY ${_arg_OUTPUT_DIRECTORY}
              OUTPUT_VARIABLE outVar 
              ERROR_VARIABLE errorVar)
@@ -379,7 +379,7 @@ if(NOT EXISTS "${_arg_OUTPUT_DIRECTORY}/${_arg_OUTPUT_FILE_NAME}${_arg_OUTPUT_FI
 			 message("outVar: ${outVar}")
 			 message("errorVar: ${errorVar}")
 	 else()
-                     execute_process(COMMAND  dotnet /home/${USERNAME}/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro ${_arg_OUTPUT_FILE_NAME}
+		     execute_process(COMMAND  dotnet /home/${USERNAME}/QR_Sync/CgenMin/CgenMin/bin/Debug/net6.0/CgenMin.dll macro
              WORKING_DIRECTORY ${_arg_OUTPUT_DIRECTORY}
              OUTPUT_VARIABLE outVar 
              ERROR_VARIABLE errorVar)

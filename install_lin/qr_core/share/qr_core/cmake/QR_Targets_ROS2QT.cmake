@@ -243,11 +243,12 @@ macro(QR_CreateTarget_ROS2Library)
   #iterate through all AO_TO_SET and create a ros library for each case where that AO was set to real.
   #append that name to the library. also make the case where If no AO was set on the AO_TO_SET list. Make this
   #be called "AllSurrogates"
-  set(AOS_TOITERATE  ${AO_TO_SET})
-    foreach(AO_TO_SET_l ${AOS_TOITERATE})
+  #dont add this feature
+  # set(AOS_TOITERATE  ${AO_TO_SET})
+    # foreach(AO_TO_SET_l ${AOS_TOITERATE})
 
 #    ament_auto_
-    add_library(${MODULE_NAME}_ROSlib_${AO_TO_SET_l} SHARED
+    add_library(${MODULE_NAME}_ROSlib  SHARED #_${AO_TO_SET_l}
             ${SOURCES}
             ${HEADERS}
                 ${CPPSOURCES}   #dont do it this way!!! you'll get weird errors again with the whole src file not being called!
@@ -260,27 +261,28 @@ macro(QR_CreateTarget_ROS2Library)
             ${QT_UIS}
         )
 
-    set(ALL_ROS_LIBRARIES ${ALL_ROS_LIBRARIES} ${MODULE_NAME}_ROSlib_${AO_TO_SET_l})
+    set(ALL_ROS_LIBRARIES ${ALL_ROS_LIBRARIES} ${MODULE_NAME}_ROSlib)#_${AO_TO_SET_l} dont add this feature
 
     source_group(DontTouch FILES ${CPPHEADERS} ${CPPSOURCES})
 
-    _SET_AO_COMPILE_DEF(
-        TARGET_NAME ${MODULE_NAME}_ROSlib_${AO_TO_SET_l}
-    AO_NAME ${AO_TO_SET_l} )
+    # dont add this feature
+    # _SET_AO_COMPILE_DEF(
+    #     TARGET_NAME ${MODULE_NAME}_ROSlib#_${AO_TO_SET_l}
+    # AO_NAME ${AO_TO_SET_l} )
 
 
 #    message("11111111111111 \n ${MODULE_NAME}_ROSlib_${AO_TO_SET_l} has been given ${AO_TO_SET_l}Real  \n 111111111111111111111111111")
 
-    target_compile_definitions(${MODULE_NAME}_ROSlib_${AO_TO_SET_l} PRIVATE "COMPOSITION_BUILDING_DLL")
+    target_compile_definitions(${MODULE_NAME}_ROSlib PRIVATE "COMPOSITION_BUILDING_DLL")#_${AO_TO_SET_l} dont add this feature
 
-    target_include_directories(${MODULE_NAME}_ROSlib_${AO_TO_SET_l}
+    target_include_directories(${MODULE_NAME}_ROSlib #_${AO_TO_SET_l} dont add this feature
       PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
       $<INSTALL_INTERFACE:include>
     )
 
-    ament_target_dependencies(${MODULE_NAME}_ROSlib_${AO_TO_SET_l} ${ALL_DEPENDS})
+    ament_target_dependencies(${MODULE_NAME}_ROSlib ${ALL_DEPENDS}) #_${AO_TO_SET_l} dont add this feature
 
-    endforeach()
+    # endforeach()
 
 
 

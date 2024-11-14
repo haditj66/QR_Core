@@ -136,7 +136,7 @@ protected:
 
 
 
-///this is meant to be used for ros tickets that come from services. They have mutex to await the ticket.
+///this is meant to be used for futures. They have mutex to await the ticket.
 template<typename TFuture, typename TReturnDataType>
 //class Ticket : public TicketFutureBase<TReturnDataType>
 class TicketFuture  : public TicketFutureBase<TFuture, TReturnDataType>
@@ -198,7 +198,7 @@ protected:
 };
 
 
-
+#ifdef ROS2_PROJECT
 
 ///this is meant to be used for ros tickets that come from services. They have mutex to await the ticket.
 template<typename TFuture, typename TReturnDataType,typename TInterfaceType >
@@ -228,7 +228,7 @@ public:
     {
         CallbackToServiceVar = [&,this](TSharedFuture inner_future)
         {
-            QR_Print("callback for addobjectToWorld recieved");
+            //QR_Print("callback for addobjectToWorld recieved");
             auto res = inner_future.get()->result;
             this->MutexForTicket.unlock();
         };
@@ -291,14 +291,27 @@ class TicketFuture_RosService<TFuture, void, TInterfaceType> : public TicketFutu
     //    typedef typename rclcpp::Client<void> TClient1;
     //    typedef typename TClient1::SharedResponse TClient;
     //    typedef typename  std::shared_future<TClient> TFutureType;
-
+    typedef typename rclcpp::Client<TInterfaceType>::SharedFuture TSharedFuture;
 
 public:
-    //Ticket(std::shared_future<rclcpp::Client<int>::SharedResponse> future) : TicketFutureBase<int>(future)
-    TicketFuture_RosService(TFuture future) : TicketFutureBase<TFuture, void>(future)
-    {
-    }
 
+    std::function<void(TSharedFuture)> CallbackToServiceVar;
+
+    //Ticket(std::shared_future<rclcpp::Client<int>::SharedResponse> future) : TicketFutureBase<int>(future)
+    TicketFuture_RosService( ) : TicketFutureBase<TFuture, void>( )
+    {
+        CallbackToServiceVar = [&,this](TSharedFuture inner_future)
+        {
+            //QR_Print("callback for addobjectToWorld recieved");
+           // auto res = inner_future.get()->result;
+            this->MutexForTicket.unlock();
+        };
+
+    }
+    void SetNewFuture(TFuture future )
+    {
+        this->resultTaskToAwait = future;
+    }
 protected:
     void _AwaitRequestUntilFinished() override
     {
@@ -343,3 +356,4 @@ protected:
     }
 
 };
+#endif

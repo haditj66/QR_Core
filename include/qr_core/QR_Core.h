@@ -3,14 +3,12 @@
 
 #include "QR_Print.h"
 #include "QR_rand.h"
-
-#ifdef ROS2_PROJECT
-#include "QR_Ticket.h"
-#endif
+ 
+#include "QR_Ticket.h" 
 #include "QR_DataSyncing.h"
 #include "QR_Utils.h"
 
-#include "QR_AO.h""
+#include "QR_AO.h"
 
 #include "visibility_control.h"
 
@@ -208,10 +206,11 @@ public:
         auto node =
           std::make_shared<AONodeType>(rclcpp::NodeOptions());
         exec->add_node(node);
+        #ifndef AllSurrogates
+                 AOGlobalNode = (rclcpp::Node*)node->ForNode;
+        #endif
 
-#ifndef AllSurrogates
-        AOGlobalNode = (rclcpp::Node*)node->ForNode;
-#endif
+
 
          return node;
     }
