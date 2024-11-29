@@ -6,8 +6,6 @@
 module qr_core {
   module srv {
     struct VoidInt64_Request {
-      uint64 id;
-
       int64 arg1;
     };
     struct VoidInt64_Response {

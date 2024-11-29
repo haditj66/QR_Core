@@ -40,16 +40,32 @@ private:
   ::qr_core::msg::VoidInt32Changed msg_;
 };
 
-class Init_VoidInt32Changed_id
+class Init_VoidInt32Changed_id2
 {
 public:
-  Init_VoidInt32Changed_id()
+  explicit Init_VoidInt32Changed_id2(::qr_core::msg::VoidInt32Changed & msg)
+  : msg_(msg)
+  {}
+  Init_VoidInt32Changed_data id2(::qr_core::msg::VoidInt32Changed::_id2_type arg)
+  {
+    msg_.id2 = std::move(arg);
+    return Init_VoidInt32Changed_data(msg_);
+  }
+
+private:
+  ::qr_core::msg::VoidInt32Changed msg_;
+};
+
+class Init_VoidInt32Changed_id1
+{
+public:
+  Init_VoidInt32Changed_id1()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  Init_VoidInt32Changed_data id(::qr_core::msg::VoidInt32Changed::_id_type arg)
+  Init_VoidInt32Changed_id2 id1(::qr_core::msg::VoidInt32Changed::_id1_type arg)
   {
-    msg_.id = std::move(arg);
-    return Init_VoidInt32Changed_data(msg_);
+    msg_.id1 = std::move(arg);
+    return Init_VoidInt32Changed_id2(msg_);
   }
 
 private:
@@ -67,7 +83,7 @@ template<>
 inline
 auto build<::qr_core::msg::VoidInt32Changed>()
 {
-  return qr_core::msg::builder::Init_VoidInt32Changed_id();
+  return qr_core::msg::builder::Init_VoidInt32Changed_id1();
 }
 
 }  // namespace qr_core

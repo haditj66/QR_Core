@@ -41,7 +41,6 @@ struct VoidInt64_Request_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->id = 0ull;
       this->arg1 = 0ll;
     }
   }
@@ -52,26 +51,16 @@ struct VoidInt64_Request_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->id = 0ull;
       this->arg1 = 0ll;
     }
   }
 
   // field types and members
-  using _id_type =
-    uint64_t;
-  _id_type id;
   using _arg1_type =
     int64_t;
   _arg1_type arg1;
 
   // setters for named parameter idiom
-  Type & set__id(
-    const uint64_t & _arg)
-  {
-    this->id = _arg;
-    return *this;
-  }
   Type & set__arg1(
     const int64_t & _arg)
   {
@@ -121,9 +110,6 @@ struct VoidInt64_Request_
   // comparison operators
   bool operator==(const VoidInt64_Request_ & other) const
   {
-    if (this->id != other.id) {
-      return false;
-    }
     if (this->arg1 != other.arg1) {
       return false;
     }

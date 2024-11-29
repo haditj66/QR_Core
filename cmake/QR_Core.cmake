@@ -139,7 +139,7 @@ macro(QR_project)
 
 if(QR_PROJECT_TYPE STREQUAL "INTERFACE")
 else()
-    _QR_Generate_Config()
+#_QR_Generate_Config() this is now done in cgen generate
 
     message("Config file  built. at location  ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}")
 endif()
@@ -939,19 +939,26 @@ ${temp_arg_inter}
 #    LIBRARY_NAME ${MODULE_NAME}_i
 #    DEPENDENCIES  ${ALL_DEPENDENCIES_NEED_FOR_INTERFACES})
 
+list(LENGTH ALL_INTERFACES_CREATED list_length)
+
 if(QR_PROJECT_TYPE STREQUAL "INTERFACE" )
+    if(NOT list_length EQUAL 0)
+
     rosidl_generate_interfaces(${MODULE_NAME}_i
         ${ALL_INTERFACES_CREATED}
         LIBRARY_NAME ${MODULE_NAME}_i
         DEPENDENCIES  ${ALL_DEPENDENCIES_NEED_FOR_INTERFACES})
+    endif()
 elseif(QR_PROJECT_TYPE STREQUAL "QR")
+    if(NOT list_length EQUAL 0)
+
     rosidl_generate_interfaces(${MODULE_NAME}
         ${ALL_INTERFACES_CREATED}
         DEPENDENCIES  ${ALL_DEPENDENCIES_NEED_FOR_INTERFACES} #builtin_interfaces std_msgs # ${INTERFACE_PKGS_THIS_PKG_DEPENDS_ON}  #
         ADD_LINTER_TESTS
                )
+    endif()
 endif()
-
 
         #return()
         endif()

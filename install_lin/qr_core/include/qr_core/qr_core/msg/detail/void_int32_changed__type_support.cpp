@@ -38,17 +38,35 @@ void VoidInt32Changed_fini_function(void * message_memory)
   typed_message->~VoidInt32Changed();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember VoidInt32Changed_message_member_array[2] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember VoidInt32Changed_message_member_array[3] = {
   {
-    "id",  // name
-    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_UINT32,  // type
+    "id1",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT64,  // type
     0,  // upper bound of string
     nullptr,  // members of sub message
     false,  // is key
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(qr_core::msg::VoidInt32Changed, id),  // bytes offset in struct
+    offsetof(qr_core::msg::VoidInt32Changed, id1),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "id2",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT64,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(qr_core::msg::VoidInt32Changed, id2),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -80,7 +98,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember VoidInt32Chan
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers VoidInt32Changed_message_members = {
   "qr_core::msg",  // message namespace
   "VoidInt32Changed",  // message name
-  2,  // number of fields
+  3,  // number of fields
   sizeof(qr_core::msg::VoidInt32Changed),
   false,  // has_any_key_member_
   VoidInt32Changed_message_member_array,  // message members

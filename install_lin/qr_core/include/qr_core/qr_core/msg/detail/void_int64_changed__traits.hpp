@@ -28,10 +28,17 @@ inline void to_flow_style_yaml(
   std::ostream & out)
 {
   out << "{";
-  // member: id
+  // member: id1
   {
-    out << "id: ";
-    rosidl_generator_traits::value_to_yaml(msg.id, out);
+    out << "id1: ";
+    rosidl_generator_traits::value_to_yaml(msg.id1, out);
+    out << ", ";
+  }
+
+  // member: id2
+  {
+    out << "id2: ";
+    rosidl_generator_traits::value_to_yaml(msg.id2, out);
     out << ", ";
   }
 
@@ -47,13 +54,23 @@ inline void to_block_style_yaml(
   const VoidInt64Changed & msg,
   std::ostream & out, size_t indentation = 0)
 {
-  // member: id
+  // member: id1
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    out << "id: ";
-    rosidl_generator_traits::value_to_yaml(msg.id, out);
+    out << "id1: ";
+    rosidl_generator_traits::value_to_yaml(msg.id1, out);
+    out << "\n";
+  }
+
+  // member: id2
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "id2: ";
+    rosidl_generator_traits::value_to_yaml(msg.id2, out);
     out << "\n";
   }
 

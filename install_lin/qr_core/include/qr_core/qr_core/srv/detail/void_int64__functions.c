@@ -16,7 +16,6 @@ qr_core__srv__VoidInt64_Request__init(qr_core__srv__VoidInt64_Request * msg)
   if (!msg) {
     return false;
   }
-  // id
   // arg1
   return true;
 }
@@ -27,7 +26,6 @@ qr_core__srv__VoidInt64_Request__fini(qr_core__srv__VoidInt64_Request * msg)
   if (!msg) {
     return;
   }
-  // id
   // arg1
 }
 
@@ -35,10 +33,6 @@ bool
 qr_core__srv__VoidInt64_Request__are_equal(const qr_core__srv__VoidInt64_Request * lhs, const qr_core__srv__VoidInt64_Request * rhs)
 {
   if (!lhs || !rhs) {
-    return false;
-  }
-  // id
-  if (lhs->id != rhs->id) {
     return false;
   }
   // arg1
@@ -56,8 +50,6 @@ qr_core__srv__VoidInt64_Request__copy(
   if (!input || !output) {
     return false;
   }
-  // id
-  output->id = input->id;
   // arg1
   output->arg1 = input->arg1;
   return true;

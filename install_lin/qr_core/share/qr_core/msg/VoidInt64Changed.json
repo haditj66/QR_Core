@@ -4,9 +4,19 @@
       "type_name": "qr_core/msg/VoidInt64Changed",
       "fields": [
         {
-          "name": "id",
+          "name": "id1",
           "type": {
-            "type_id": 9,
+            "type_id": 8,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "id2",
+          "type": {
+            "type_id": 8,
             "capacity": 0,
             "string_capacity": 0,
             "nested_type_name": ""
@@ -30,7 +40,7 @@
   "type_hashes": [
     {
       "type_name": "qr_core/msg/VoidInt64Changed",
-      "hash_string": "RIHS01_619713367c2063183fab73425b7e8a98a4f3181d1bc422b21b078880826e5583"
+      "hash_string": "RIHS01_5ff808fd7c3643f1018805dfe57768849f2466d4b7b7a22087514c8869819a67"
     }
   ]
 }

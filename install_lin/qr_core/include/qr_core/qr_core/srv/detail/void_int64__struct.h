@@ -23,7 +23,6 @@ extern "C"
 /// Struct defined in srv/VoidInt64 in the package qr_core.
 typedef struct qr_core__srv__VoidInt64_Request
 {
-  uint64_t id;
   int64_t arg1;
 } qr_core__srv__VoidInt64_Request;
 

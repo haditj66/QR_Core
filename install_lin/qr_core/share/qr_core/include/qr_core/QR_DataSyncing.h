@@ -7,8 +7,46 @@
 #include "QR_Ticket.h"
 #include "rclcpp/rclcpp.hpp"
 
+#include <list>
+#include <random>
+
 extern rclcpp::Node* AOGlobalNode;
 extern rclcpp::Node* TheDataAccessManagerNode;
+
+
+
+
+class DataSyncSession {
+private:
+    int64_t arg1_;
+    int64_t arg2_;
+
+    // Helper function to generate a random int64
+    int64_t generateRandomInt64() {
+        std::random_device rd;              // Seed generator
+        std::mt19937_64 gen(rd());          // 64-bit Mersenne Twister engine
+        std::uniform_int_distribution<int64_t> dist(INT64_MIN, INT64_MAX);
+        return dist(gen);
+    }
+
+public:
+    // Constructor: Generates two random int64 numbers
+    DataSyncSession()
+        : arg1_(generateRandomInt64()), arg2_(generateRandomInt64()) {
+
+    }
+
+    // Function to check if the given arguments match the session
+    bool IsSameSession(int64_t arg1, int64_t arg2) const {
+        return (arg1_ == arg1 && arg2_ == arg2);
+    }
+
+    //  Accessor functions for arg1_ and arg2_
+    int64_t getArg1() const { return arg1_; }
+    int64_t getArg2() const { return arg2_; }
+};
+
+
 
 
 
@@ -61,15 +99,22 @@ public:
 
     void datachanged_Callback(const DataChangedCall msg)//(const DataChangedCall msg)
     {
-        //if the id here is the same as the ticket id, I can say that this callback was from my request to change this data. This means that
-        //the data has now been changed based on the ticket request.
-        if(this->TicketForData != nullptr)
-        {
-            if(msg->id == this->TicketForData->getid())
-            {
-                SetHasBeenRefreshedSinceSet(true);
-            }
+        //I need to make sure the requesting surrogate of this data set is not this surrogate as data is already updated for it upont request.
+        //do this by looking through the DataSyncSession. if the id matches, it should be removed from the list and this function should exit.
+        bool isSameSurrogate = CheckIfSessionIsTheSame(msg->id1, msg->id2);
+        if (isSameSurrogate == true) {
+            return;
         }
+
+        //if the id here is the same as the ticket id, I can say that this callback was from my request to change this data. This means that
+        // //the data has now been changed based on the ticket request.
+        // if(this->TicketForData != nullptr)
+        // {
+        //     if(msg->id == this->TicketForData->getid())
+        //     {
+        //         SetHasBeenRefreshedSinceSet(true);
+        //     }
+        // }
 
         QR_Print(" %s  onchanged event callback recieved. value changed to: %d", this->Id.c_str(), msg->data);
 
@@ -78,6 +123,8 @@ public:
         *DataToChange = msg->data;
         //      int64_t s = msg->data;
     }
+
+
 
     TicketFuture<DataChanged, void>*
         //Ticket<std::shared_future<rclcpp::Client<qr_core::srv::Int64Int64>::SharedResponse>, void>*
@@ -93,10 +140,38 @@ public:
     }
     bool HasBeenRefreshedSinceSet(){return _HasBeenRefreshedSinceSet;}
 
+    DataSyncSession* GenerateSession()
+    {
+        DataSyncSession* s = new DataSyncSession();
+        myList.push_back(s);
+        return s;
+    }
+
 private:
     std::string Id;
     bool _HasBeenRefreshedSinceSet;
     TData* DataToChange;
+
+    std::list<DataSyncSession*> myList;
+
+
+    bool CheckIfSessionIsTheSame(int64_t id1, int64_t id2)
+    {
+
+        for (auto it = myList.begin(); it != myList.end(); ++it)
+        {
+            DataSyncSession* session = *it;
+
+            // Check if the session's ID matches the requesting ID
+            if (session->IsSameSession(id1, id2))
+            {
+                // Remove the session from the list
+                myList.erase(it);
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
 

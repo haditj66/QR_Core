@@ -1,0 +1,19 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from qr_core/srv/SyncInt32.srv
+// generated code does not contain a copyright notice
+
+
+module qr_core {
+  module srv {
+    struct SyncInt32_Request {
+      int64 id1;
+
+      int64 id2;
+
+      int32 arg1;
+    };
+    struct SyncInt32_Response {
+      uint8 structure_needs_at_least_one_member;
+    };
+  };
+};

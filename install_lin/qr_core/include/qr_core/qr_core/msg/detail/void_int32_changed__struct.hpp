@@ -41,7 +41,8 @@ struct VoidInt32Changed_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->id = 0ul;
+      this->id1 = 0ll;
+      this->id2 = 0ll;
       this->data = 0l;
     }
   }
@@ -52,24 +53,34 @@ struct VoidInt32Changed_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->id = 0ul;
+      this->id1 = 0ll;
+      this->id2 = 0ll;
       this->data = 0l;
     }
   }
 
   // field types and members
-  using _id_type =
-    uint32_t;
-  _id_type id;
+  using _id1_type =
+    int64_t;
+  _id1_type id1;
+  using _id2_type =
+    int64_t;
+  _id2_type id2;
   using _data_type =
     int32_t;
   _data_type data;
 
   // setters for named parameter idiom
-  Type & set__id(
-    const uint32_t & _arg)
+  Type & set__id1(
+    const int64_t & _arg)
   {
-    this->id = _arg;
+    this->id1 = _arg;
+    return *this;
+  }
+  Type & set__id2(
+    const int64_t & _arg)
+  {
+    this->id2 = _arg;
     return *this;
   }
   Type & set__data(
@@ -121,7 +132,10 @@ struct VoidInt32Changed_
   // comparison operators
   bool operator==(const VoidInt32Changed_ & other) const
   {
-    if (this->id != other.id) {
+    if (this->id1 != other.id1) {
+      return false;
+    }
+    if (this->id2 != other.id2) {
       return false;
     }
     if (this->data != other.data) {

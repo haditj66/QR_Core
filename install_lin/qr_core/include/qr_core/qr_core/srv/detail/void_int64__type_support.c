@@ -31,25 +31,7 @@ void qr_core__srv__VoidInt64_Request__rosidl_typesupport_introspection_c__VoidIn
   qr_core__srv__VoidInt64_Request__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember qr_core__srv__VoidInt64_Request__rosidl_typesupport_introspection_c__VoidInt64_Request_message_member_array[2] = {
-  {
-    "id",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT64,  // type
-    0,  // upper bound of string
-    NULL,  // members of sub message
-    false,  // is key
-    false,  // is array
-    0,  // array size
-    false,  // is upper bound
-    offsetof(qr_core__srv__VoidInt64_Request, id),  // bytes offset in struct
-    NULL,  // default value
-    NULL,  // size() function pointer
-    NULL,  // get_const(index) function pointer
-    NULL,  // get(index) function pointer
-    NULL,  // fetch(index, &value) function pointer
-    NULL,  // assign(index, value) function pointer
-    NULL  // resize(index) function pointer
-  },
+static rosidl_typesupport_introspection_c__MessageMember qr_core__srv__VoidInt64_Request__rosidl_typesupport_introspection_c__VoidInt64_Request_message_member_array[1] = {
   {
     "arg1",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_INT64,  // type
@@ -73,7 +55,7 @@ static rosidl_typesupport_introspection_c__MessageMember qr_core__srv__VoidInt64
 static const rosidl_typesupport_introspection_c__MessageMembers qr_core__srv__VoidInt64_Request__rosidl_typesupport_introspection_c__VoidInt64_Request_message_members = {
   "qr_core__srv",  // message namespace
   "VoidInt64_Request",  // message name
-  2,  // number of fields
+  1,  // number of fields
   sizeof(qr_core__srv__VoidInt64_Request),
   false,  // has_any_key_member_
   qr_core__srv__VoidInt64_Request__rosidl_typesupport_introspection_c__VoidInt64_Request_message_member_array,  // message members

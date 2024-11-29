@@ -31,17 +31,35 @@ void qr_core__msg__VoidInt32Changed__rosidl_typesupport_introspection_c__VoidInt
   qr_core__msg__VoidInt32Changed__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember qr_core__msg__VoidInt32Changed__rosidl_typesupport_introspection_c__VoidInt32Changed_message_member_array[2] = {
+static rosidl_typesupport_introspection_c__MessageMember qr_core__msg__VoidInt32Changed__rosidl_typesupport_introspection_c__VoidInt32Changed_message_member_array[3] = {
   {
-    "id",  // name
-    rosidl_typesupport_introspection_c__ROS_TYPE_UINT32,  // type
+    "id1",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_INT64,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     false,  // is key
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(qr_core__msg__VoidInt32Changed, id),  // bytes offset in struct
+    offsetof(qr_core__msg__VoidInt32Changed, id1),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "id2",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_INT64,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(qr_core__msg__VoidInt32Changed, id2),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -73,7 +91,7 @@ static rosidl_typesupport_introspection_c__MessageMember qr_core__msg__VoidInt32
 static const rosidl_typesupport_introspection_c__MessageMembers qr_core__msg__VoidInt32Changed__rosidl_typesupport_introspection_c__VoidInt32Changed_message_members = {
   "qr_core__msg",  // message namespace
   "VoidInt32Changed",  // message name
-  2,  // number of fields
+  3,  // number of fields
   sizeof(qr_core__msg__VoidInt32Changed),
   false,  // has_any_key_member_
   qr_core__msg__VoidInt32Changed__rosidl_typesupport_introspection_c__VoidInt32Changed_message_member_array,  // message members

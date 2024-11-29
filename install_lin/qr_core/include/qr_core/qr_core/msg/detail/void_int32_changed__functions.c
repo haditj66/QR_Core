@@ -17,7 +17,8 @@ qr_core__msg__VoidInt32Changed__init(qr_core__msg__VoidInt32Changed * msg)
   if (!msg) {
     return false;
   }
-  // id
+  // id1
+  // id2
   // data
   return true;
 }
@@ -28,7 +29,8 @@ qr_core__msg__VoidInt32Changed__fini(qr_core__msg__VoidInt32Changed * msg)
   if (!msg) {
     return;
   }
-  // id
+  // id1
+  // id2
   // data
 }
 
@@ -38,8 +40,12 @@ qr_core__msg__VoidInt32Changed__are_equal(const qr_core__msg__VoidInt32Changed *
   if (!lhs || !rhs) {
     return false;
   }
-  // id
-  if (lhs->id != rhs->id) {
+  // id1
+  if (lhs->id1 != rhs->id1) {
+    return false;
+  }
+  // id2
+  if (lhs->id2 != rhs->id2) {
     return false;
   }
   // data
@@ -57,8 +63,10 @@ qr_core__msg__VoidInt32Changed__copy(
   if (!input || !output) {
     return false;
   }
-  // id
-  output->id = input->id;
+  // id1
+  output->id1 = input->id1;
+  // id2
+  output->id2 = input->id2;
   // data
   output->data = input->data;
   return true;

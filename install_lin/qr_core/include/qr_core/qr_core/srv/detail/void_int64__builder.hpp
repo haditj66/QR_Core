@@ -27,29 +27,13 @@ namespace builder
 class Init_VoidInt64_Request_arg1
 {
 public:
-  explicit Init_VoidInt64_Request_arg1(::qr_core::srv::VoidInt64_Request & msg)
-  : msg_(msg)
+  Init_VoidInt64_Request_arg1()
+  : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
   ::qr_core::srv::VoidInt64_Request arg1(::qr_core::srv::VoidInt64_Request::_arg1_type arg)
   {
     msg_.arg1 = std::move(arg);
     return std::move(msg_);
-  }
-
-private:
-  ::qr_core::srv::VoidInt64_Request msg_;
-};
-
-class Init_VoidInt64_Request_id
-{
-public:
-  Init_VoidInt64_Request_id()
-  : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
-  {}
-  Init_VoidInt64_Request_arg1 id(::qr_core::srv::VoidInt64_Request::_id_type arg)
-  {
-    msg_.id = std::move(arg);
-    return Init_VoidInt64_Request_arg1(msg_);
   }
 
 private:
@@ -67,7 +51,7 @@ template<>
 inline
 auto build<::qr_core::srv::VoidInt64_Request>()
 {
-  return qr_core::srv::builder::Init_VoidInt64_Request_id();
+  return qr_core::srv::builder::Init_VoidInt64_Request_arg1();
 }
 
 }  // namespace qr_core

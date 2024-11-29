@@ -139,8 +139,15 @@ public:
         }
         //first load the serialized settings file
         {
-          cereal::XMLInputArchive archive(so); //XMLInputArchive archive(so); // Create an input archive
-          archive(qRSettings); // Read the data from the archive
+
+            try {
+                cereal::XMLInputArchive archive(so); //XMLInputArchive archive(so); // Create an input archive
+                archive(qRSettings); // Read the data from the archive
+            } catch (...) {
+                QR_Print("loading the qRSettings file %s has failed. are you sure the setting file  located at \n %s \n matches the parameters in the QRsettings class?", FileSelection, pathToSettingsFile);
+                throw ("qRSettings file not matching  cereal file");
+            }
+
         }
         //close streams
         so.close();

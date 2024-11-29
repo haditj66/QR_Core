@@ -22,7 +22,8 @@ extern "C"
 /// Struct defined in msg/VoidInt32Changed in the package qr_core.
 typedef struct qr_core__msg__VoidInt32Changed
 {
-  uint32_t id;
+  int64_t id1;
+  int64_t id2;
   int32_t data;
 } qr_core__msg__VoidInt32Changed;
 

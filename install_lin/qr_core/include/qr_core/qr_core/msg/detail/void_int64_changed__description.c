@@ -11,10 +11,10 @@ qr_core__msg__VoidInt64Changed__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x61, 0x97, 0x13, 0x36, 0x7c, 0x20, 0x63, 0x18,
-      0x3f, 0xab, 0x73, 0x42, 0x5b, 0x7e, 0x8a, 0x98,
-      0xa4, 0xf3, 0x18, 0x1d, 0x1b, 0xc4, 0x22, 0xb2,
-      0x1b, 0x07, 0x88, 0x80, 0x82, 0x6e, 0x55, 0x83,
+      0x5f, 0xf8, 0x08, 0xfd, 0x7c, 0x36, 0x43, 0xf1,
+      0x01, 0x88, 0x05, 0xdf, 0xe5, 0x77, 0x68, 0x84,
+      0x9f, 0x24, 0x66, 0xd4, 0xb7, 0xb7, 0xa2, 0x20,
+      0x87, 0x51, 0x4c, 0x88, 0x69, 0x81, 0x9a, 0x67,
     }};
   return &hash;
 }
@@ -31,14 +31,25 @@ qr_core__msg__VoidInt64Changed__get_type_hash(
 static char qr_core__msg__VoidInt64Changed__TYPE_NAME[] = "qr_core/msg/VoidInt64Changed";
 
 // Define type names, field names, and default values
-static char qr_core__msg__VoidInt64Changed__FIELD_NAME__id[] = "id";
+static char qr_core__msg__VoidInt64Changed__FIELD_NAME__id1[] = "id1";
+static char qr_core__msg__VoidInt64Changed__FIELD_NAME__id2[] = "id2";
 static char qr_core__msg__VoidInt64Changed__FIELD_NAME__data[] = "data";
 
 static rosidl_runtime_c__type_description__Field qr_core__msg__VoidInt64Changed__FIELDS[] = {
   {
-    {qr_core__msg__VoidInt64Changed__FIELD_NAME__id, 2, 2},
+    {qr_core__msg__VoidInt64Changed__FIELD_NAME__id1, 3, 3},
     {
-      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64,
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64,
+      0,
+      0,
+      {NULL, 0, 0},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {qr_core__msg__VoidInt64Changed__FIELD_NAME__id2, 3, 3},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64,
       0,
       0,
       {NULL, 0, 0},
@@ -66,7 +77,7 @@ qr_core__msg__VoidInt64Changed__get_type_description(
   static const rosidl_runtime_c__type_description__TypeDescription description = {
     {
       {qr_core__msg__VoidInt64Changed__TYPE_NAME, 28, 28},
-      {qr_core__msg__VoidInt64Changed__FIELDS, 2, 2},
+      {qr_core__msg__VoidInt64Changed__FIELDS, 3, 3},
     },
     {NULL, 0, 0},
   };
@@ -77,7 +88,8 @@ qr_core__msg__VoidInt64Changed__get_type_description(
 }
 
 static char toplevel_type_raw_source[] =
-  "uint64 id\n"
+  "int64 id1\n"
+  "int64 id2\n"
   "int64 data";
 
 static char msg_encoding[] = "msg";
@@ -92,7 +104,7 @@ qr_core__msg__VoidInt64Changed__get_individual_type_description_source(
   static const rosidl_runtime_c__type_description__TypeSource source = {
     {qr_core__msg__VoidInt64Changed__TYPE_NAME, 28, 28},
     {msg_encoding, 3, 3},
-    {toplevel_type_raw_source, 21, 21},
+    {toplevel_type_raw_source, 31, 31},
   };
   return &source;
 }
