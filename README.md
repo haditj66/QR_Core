@@ -34,8 +34,8 @@ TableOfContentsForQRCore47896205709769
 
  
 # Basic QR_Core based project structure 
+![Project Structure](https://github.com/haditj66/QR_Core/blob/main/doc/images/project_structure.PNG) 
 
-   ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/project_structure.png)
 
 
 
