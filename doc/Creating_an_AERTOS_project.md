@@ -1,49 +1,21 @@
+# Creating an AEROS project
 
-# Creating an AERTOS project
-<!--  
-//UserCode_Sectiona
--->
  These are the components to creating an AERTOS project.
- <!--  
-//UserCode_Sectiona_end
--->
 
-## Table of Contents
-- [AERTOS](https://github.com/haditj66/AERTOSCopy)
-- [Installation](https://github.com/haditj66/AERTOSCopy/blob/master/doc/Installation.md)
-- [Creating an AERTOS project](https://github.com/haditj66/AERTOSCopy/blob/master/doc/Creating_an_AERTOS_project.md)
-- [AERTOS concepts](https://github.com/haditj66/AERTOSCopy/blob/master/doc/AERTOS_concepts.md)
-    - [Active Objects (AO)](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/AOs.md)
-    - [Events](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/Events.md)
-    - [LoopObject](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/LoopObject.md)
-    - [AEClock](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/AEClock.md)
-    - [Observers](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/Observers.md)
-        - [Sensors](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/observers/Sensors.md)
-        - [Filters](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/observers/Filters.md)
-        - [SPB](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/observers/SPB.md)
-    - [Utilities](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/Utilities.md)
-    - [Finite State Machine](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/FSM.md)
-    - [Target PC or embedded device](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/Target_PC_Or_Embed.md)
-    - [AEHal](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/AEHal.md)
-    - [Integration Testing Debugging](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/IntegrationTesting.md)
-    - [Unit Testing](https://github.com/haditj66/AERTOSCopy/blob/master/doc/concepts/UnitTesting.md)
-- [Example Projects](https://github.com/haditj66/AERTOSCopy/blob/master/doc/Examples.md)
-    - [Example blinky](https://github.com/haditj66/AERTOSCopy/blob/master/doc/example/blinky.md)
-    - [Advanced Example Motor speed controller](https://github.com/haditj66/AERTOSCopy/blob/master/doc/example/motor_speed_controller.md)
-- [AERTOS Tools](https://github.com/haditj66/AERTOSCopy/blob/master/doc/AERTOS_TOOLS.md)
-    - [Upload Data To PC](https://github.com/haditj66/AERTOSCopy/blob/master/doc/tools/UploadDataToPC.md)
- 
+
+TableOfContentsForQRCore47896205709769
+
+TableOfContentsForQRCore47896205709769
+
 
 ### Page Contents
 - [Overview](#overview)
 
-- [CGEN commands for AERTOS](#cgen-commands-for-aertos)
+- [initializing new module](##initializing new module)
+  
+- [The Config file](## The Config file)
 
-- [The Config file](#the-config-file)
-
-- [AEConfig](#aeconfig)
-
-- [ProjectTests](#projecttests)
+- [ProjectTests](## Project config file.)
 
 - [Declaring events in project](#declaring-events-in-project)
 
@@ -58,212 +30,105 @@
 - [the cmakegui for cmake options](#the-cmakegui-for-cmake-options)
 
 
-
-<!--  
-//UserCode_Sectionb
-//UserCode_Sectionb_end
- -->
+ 
  
 ## Overview
-<!--  
- //UserCode_Sectionoverview 
- -->
- 
-There are three components to AERTOS. To walk through a full example of creating a simple project, see  [Example blinky](https://github.com/haditj66/AERTOSCopy/blob/master/doc/example/blinky.md).
 
- - CGEN: A .NET application that aids with code generating your AERTOS project.
- - AERTOS config project: A .NET application that you use to write c# code that CGEN will use to code generate.
- - AERTOS: The actual AERTOS project that will run on your embedded target. 
- 
- 
-
+A module is what is built in a AEROS workspace. For example the world2 example is a module. The module is borken into three projects. 
+-the cpp project is what you would think of a simple cpp console application. Non-threaded, and is meant as a project to unit test algorithms 
+and such.
  
     
-   ![](https://github.com/haditj66/AERTOS/tree/master/doc/images/Blinky1.png)
- 
- <!--  
-//UserCode_Sectionoverview_end
--->
-## CGEN commands for AERTOS
-<!--  
- //UserCode_Sectioncgencommandsforaertos
- -->
- 
- 
- To create a brand new AERTOS project, run the following command in the directory you want the project to be. Make sure to be in the AERTOS base directory of C:/AERTOSProjects
+   ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/project_structure.png)
 
-     cgen aeinit <name>
+##initializing new module
+
+ You may need to set the directory of you ROS2 installation do this with. example: -s opt/ros/jazzy
+  cgen QRinit -s <Directory>
+ 
+ To create a brand new AEROS project, run the following command in the directory you want the project to be. 
+
+     cgen QRinit <name>
+	 
+	 
 
 ----
 
-  To code generate your currently selected project based on your config project
-
-    cgen aegenerate
-Make sure to reload cmake so the project updates in AERTOS after running this command.
-   <!--  
-//UserCode_Sectioncgencommandsforaertos_end
--->
-## The Config file
-<!--  
- //UserCode_Sectiontheconfigfile
- -->
- you will find your config file. It is a c# script, in the conf folder of you AERTOS project. To configure it, open the config project, located here 
-
-     C:/AERTOSProjects/AAAConfigProj
-Add the config file to the solution by "add existing item". Make sure to "add as link" (little arrow button next to add).
-
-To select a project you want to work in
-
-    cgen aeselect <nameOfProject> <nameOfProjectTest> 
-Make sure to reload cmake so the project updates in AERTOS after running this command.
-   
-  ---
-
-<!--  
-//UserCode_Sectiontheconfigfile_end
--->
-## AEConfig
-<!--  
- //UserCode_Sectionaeconfig
-  -->
- In your config project, you can set AERTOS  settings per project test. To do this, look at the 
- [AEEXETest] attribute. You can open  parenthesis and intellesense will give you some settings you can set. For example doing this
-
-    [AEEXETest(aEconfigTOTAL_HEAP_SIZE:85000)]
-   gives the setting that the total available size of AERTOS will be 85000 bytes.
-
-<!--  
-//UserCode_Sectionaeconfig_end
--->
-## ProjectTests
-<!--  
- //UserCode_Sectionprojecttests
-   -->
- Look at the  [AEEXETest] attribute in a config project. This signifies that the function below it is a AERTOS test. You can create more than one test. To make another test, just write another function. Name it the name of your test, and give it the above attribute. Like this
-```csharp
-      [AEEXETest]
-     public void NameOfYourNewTest()
-     {  }
-```
-build your config project to update everything. 
-dont forget to do 
-
-    cgen aeselect NameOfYourNewTest
-if you want to select this test to work in. run cgen aegenerate when necessary.
-<!--  
-//UserCode_Sectionprojecttests_end
--->
-## Declaring events in project
-<!--  
- //UserCode_Sectiondeclaringeventsinproject
- -->
- Every project needs to declare all events it will be using or will need to use. All depending libraries will automatically have the events they use be imported in. To include events, do so in your config project within"_GetEventsInLibrary" function.
-Here is an example of me includeing ButtonChanged event. the 2 means that I expect I will need no more than 2 instances of that event set to a pool.
-```csharp
-    protected override List<AEEvent> _GetEventsInLibrary()
-            {
-                return new List<AEEvent>() {
-                    ButtonChanged.Init(2) 
-                };
-            }
-```       
-
-<!--  
-//UserCode_Sectiondeclaringeventsinproject_end
--->
-## peripheral declaration
-<!--  
- //UserCode_Sectionperipheraldeclaration
-  -->
-Same as events, you need to declare the peripherals that your project will use. Do this in function _GetPeripheralsInLibrary. Here is an example from the blinky project that includes a gpio and a pwm peripheral
-```cpp
-	protected override List<AEHal> _GetPeripheralsInLibrary()
-    { 
-        return new List<AEHal>() {
-            PWMPERIPHERAL1.Init(Portenum.PortD, PinEnum.PIN12),
-            GPIOPERIPHERAL1.Init(Portenum.PortA, PinEnum.PIN1)
-        };
-    }
-```
-A thing to note about declaring peripherals is that They do not carry over from depending libraries like events do. 
-
-<!--  
-//UserCode_Sectionperipheraldeclaration_end
--->
-## Libraries project depends on
-<!--  
- //UserCode_Sectionlibrariesprojectdependson
- -->
-You can easily import other libraries other people have created or that you created yourself. Do this in the _GetLibrariesIDependOn function. An exmple from the blinky project looks like this
-```csharp
-        protected override List<AEProject> _GetLibrariesIDependOn()
-        {
-            return new List<AEProject>() {
-            new commonAOs(),
-            new commonHalAOs()
-            };
-        }
-``` 
-Notice how here I use the commonAOs and the commonHalAOs library. Of course make sure the config files of libraries you depend on are also linked in the config project.
-
-<!--  
-//UserCode_Sectionlibrariesprojectdependson_end
--->
-## additional include and src files
-<!--  
- //UserCode_Sectionadditionalincludeandsrcfiles
- -->
-Sometimes you want to include other 3rd party libraries like all header libraries like Eigen. You cant put all source files in the include directory so you might need to add additional header and source directories. For example for eigen ,  I did so like this.
  
+## The Config file
+ 
+ The config project is a C# file script that you will link to the config solution. The file is located in your module 
+ <module_Base_Directory>/config/<modulename.cs>
 
-```csharp
-	protected override List<string> _GetAnyAdditionalIncludeDirs()
-    {
-        return new List<string>() { "eigen3/Eigen", "matlab_common" , "Rot2EulAngle" , "Angle2Quat", "EllipseFit" };
-    }
+open the configuration project 
+     QR_sync/ConfigProjects
+Add the config file to the solution by "add existing item". Make sure to "add as link" (little arrow button next to add).
+ 
+    
 
-    protected override List<string> _GetAnyAdditionalSRCDirs()
-    {
-        return new List<string>() { "matlab_common", "Rot2EulAngle", "Angle2Quat", "EllipseFit" };
-    }
-``` 
+## Project config file.
 
+As explained, a module is made of three projects. You can configure all these in this file. The module is the class that inherits from QRModule. For example,
+a module named sometest will be class 
+```class sometest : QRModule```
+-You can link other projects in the InitCPPLibrary, InitIFLibrary,  and InitROSLibrary. This is described more in [Creating Targets And Links](https://github.com/haditj66/QRCore/blob/master/doc/CreatingTargetsAndLinks.md) page.
 
-<!--  
-//UserCode_Sectionadditionalincludeandsrcfiles_end
--->
-## write your own cmake for a project
-<!--  
- //UserCode_Sectionwriteyourowncmakeforaproject
- -->
-if you need to write you own custom cmake stuff for perhaps adding a third party c++ library that is not header only, or needs some cmake initialization, you can do so in the file 
+-"class sometestSettings : TargetSettings" is a class that you will use to describe what all settings files will look like. Decribred more in [Settings Files](https://github.com/haditj66/QRCore/blob/master/doc/SettingsFiles.md)
 
-    AEConfigProjectUser.cmake
-located in the base directory of your project. For example, if you project is blinky, it will be located here
+-GetTargetSetting() is where you can create new setting files for the module to use. This is decribred more in [Settings Files](https://github.com/haditj66/QRCore/blob/master/doc/SettingsFiles.md)
 
-    C:\AERTOSProjects\blinky\AEConfigProjectUser.cmake
+-Each project can have multiple targets. You can create executable targets by giving a function the attribute QRTarget_cpEXE or QRTarget_RosEXE for the cpp or ROS project respectively.
+within those functions you can create instances of AO that you will use in that project. 
 
-<!--  
-//UserCode_Sectionwriteyourowncmakeforaproject_end
--->
-## the cmakegui for cmake options
-<!--  
- //UserCode_Sectionthecmakeguiforcmakeoptions
-  -->
-the cmake gui is a way to aid in helping you select cmake options a project might need to run. It pops up automatically when you run reload cmake if you are missing some options that have not been selected yet. You can create your own cmake options in the AEConfigProjectUser.cmake file for a particular project like this 
+ ## generating the project.
 
-    Cgen_Option( 
-            NAME MY_CUSTOM_OPTION
-            DESCRIPTION "what environment is this AE application set in"
-            POSSIBLEVALUES MY_POSSIBLE_VALUE1 MY_POSSIBLE_VALUE2 MY_POSSIBLE_VALUE3
-            CONSTRICTS_LATER_OPTIONS
-    )
+when you are done with the config file project, you can build ctrl-shift-b the solution to save you settings. In a terminal, within a directory of your module,
+run the cgen command to generate the projects configuration
 
-the gui will automatically read this and represent your option  as a selection.
-
-<!-- 
-//UserCode_Sectionthecmakeguiforcmakeoptions_end
--->
+`cgen QR_generate <projectType> <targetName>`
+projectType: r for a rosqt project, c for a cpp project
+projectName: the target name that you want to generate
 
 
+## sourcing and colcon building projects
+every project in a module links to the interface project. When sourcing, you have to source all dependencies first before you can colcon build. For example if you wanted to open up a ros projects, you need to source dependencies from interface to cpp library
+
+interface building and sourcing
+```
+cd <moduleDir>/rosqt/IF
+ourcolcon
+oursource
+```
+cpp building and sourcing
+```
+cd <moduleDir>
+ourcolcon
+oursource
+```
+finally ros building and sourcing
+```
+cd <moduleDir>/rosqt
+ourcolcon
+oursource
+```
+
+## Opening project in IDE
+You can use either QT creator or visual code for this. In either case, you will need to open the IDE in the terminal with the project you want to work on sourced already.
+you can source projects with the `oursource` command in the respective project directory. Then open the ide from the sourced terminal.
+
+##QTCreator
+you can run `~/Qt/Tools/QtCreator/bin/qtcreator &` or whereever you installed it. From there, go to the project tab to the left and make sure that the build directory is correct.
+
+##visual code
+you can run `. code`. Make sure you have the cmake extension and ROS extension installed.
+
+THIS IS AUTOMATICALLY DONE BY AEROS BUT I WILL LEAVE IT HERE FOR FYI: You can look in the lauunch.json file located in the .vscode folder. 
+In the "configurations" section, for every executable target, you will see the configurations automatically written for every target you set.
+
+
+
+
+ ---
+Next [Creating Targets And Links](https://github.com/haditj66/QRCore/blob/master/doc/CreatingTargetsAndLinks.md)
+ 
  
