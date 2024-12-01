@@ -33,6 +33,4 @@ and interact with other gameobjects. This is a simple application outlining the 
 The AO used in this project are 
 -world2(Surrogate AO): a server-like AO that is resposible for moving the objects around the grid.
 -gameobject(Surrogate AO): can be of any type from creatures to static objects like a rock.
-
-
- ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/world.png)
+![world](https://github.com/haditj66/QR_Core/blob/main/doc/images/world.PNG)  
