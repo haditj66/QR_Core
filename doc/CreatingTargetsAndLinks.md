@@ -8,9 +8,8 @@
  -cpp unit tests target: Each cpp project has one target by default. 
  -Interface target: automatically created. This target has all the ROS interfaces used. 
  
-Look at below diagram for reference 
- ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/project_structure.png)
-   
+Look at below diagram for reference  
+![Project Structure](https://github.com/haditj66/QR_Core/blob/main/doc/images/project_structure.PNG)    
    
 TableOfContentsForQRCore47896205709769
 
@@ -63,8 +62,8 @@ for example, if I wanted to link a ros library from module sometest, to a cpp li
 ```new QRTarget_RosLib(world2Project.world2.TargetCode_cppLibrary);```
 
 Look at below for reference of linking structure 
- ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/Link1.png)
- ![](https://github.com/haditj66/QR_Core/tree/master/doc/images/Link2.png)
+![link1](https://github.com/haditj66/QR_Core/blob/main/doc/images/Link1.PNG) 
+![link2](https://github.com/haditj66/QR_Core/blob/main/doc/images/Link2.PNG)  
  
  
  ---
