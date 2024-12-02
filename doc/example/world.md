@@ -20,8 +20,8 @@ TableOfContentsForQRCore47896205709769
     - [Finite State Machine](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/FSM.md)
     - [Target PC or embedded device](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Target_PC_Or_Embed.md) 
 - [Example Projects](https://github.com/haditj66/QR_Core/blob/master/doc/Examples.md)
-    - [Example world](https://github.com/haditj66/QR_Core/blob/master/doc/example/blinky.md)
-    - [Example sometest](https://github.com/haditj66/QR_Core/blob/master/doc/example/motor_speed_controller.md)
+    - [Example world](https://github.com/haditj66/QR_Core/blob/master/doc/example/world.md)
+    - [Example sometest](https://github.com/haditj66/QR_Core/blob/master/doc/example/sometest.md)
 - [AERTOS Tools](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_TOOLS.md)
     
 TableOfContentsForQRCore47896205709769

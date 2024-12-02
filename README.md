@@ -13,15 +13,16 @@ TableOfContentsForQRCore47896205709769
 - [AEROS concepts](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_concepts.md) 
     - [Active Objects (AO)](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/AOs.md) 
 		- [SimpleROSAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SimpleROSAO.md)
-			- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SurrogateAO.md) 
+			- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SurrogateAO.md)  
     - [Timers](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Timers.md)  
 	- [Events/Interfaces](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Events.md)
     - [Finite State Machine](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/FSM.md)
     - [Target PC or embedded device](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Target_PC_Or_Embed.md) 
 - [Example Projects](https://github.com/haditj66/QR_Core/blob/master/doc/Examples.md)
-    - [Example world](https://github.com/haditj66/QR_Core/blob/master/doc/example/blinky.md)
-    - [Example sometest](https://github.com/haditj66/QR_Core/blob/master/doc/example/motor_speed_controller.md)
+    - [Example world](https://github.com/haditj66/QR_Core/blob/master/doc/example/world.md)
+    - [Example sometest](https://github.com/haditj66/QR_Core/blob/master/doc/example/sometest.md)
 - [AERTOS Tools](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_TOOLS.md)
+    
     
 TableOfContentsForQRCore47896205709769
 
