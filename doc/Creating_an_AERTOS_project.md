@@ -16,7 +16,7 @@ TableOfContentsForQRCore47896205709769
 - [AEROS concepts](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_concepts.md) 
     - [Active Objects (AO)](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/AOs.md) 
 		- [SimpleROSAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SimpleROSAO.md)
-			- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/observers/SurrogateAO.md)  
+			- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SurrogateAO.md)  
     - [Timers](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Timers.md)  
 	- [Events/Interfaces](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Events.md)
     - [Finite State Machine](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/FSM.md)
@@ -150,6 +150,6 @@ In the "configurations" section, for every executable target, you will see the c
 
 
  ---
-Next [Creating Targets And Links](https://github.com/haditj66/QRCore/blob/master/doc/CreatingTargetsAndLinks.md)
+Next [Creating Targets And Links](https://github.com/haditj66/QR_Core/blob/master/doc/CreatingTargetsAndLinks.md)
  
  
