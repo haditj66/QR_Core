@@ -15,7 +15,5 @@ log*/
 rosqt/build*/
 rosqt/log*/
 rosqt/IF/build*/
-rosqt/IF/log*/
-doc/images*/
-doc/images/*
+rosqt/IF/log*/ 
 
