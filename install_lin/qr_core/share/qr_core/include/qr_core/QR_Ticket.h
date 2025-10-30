@@ -46,9 +46,9 @@ template<typename TFuture, typename TReturnDataType>
 class TicketFutureBase : public Ticket<TReturnDataType>
 {
 
-    //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
-    //    typedef typename TClient1::SharedResponse TClient;
-    //    typedef typename  std::shared_future<TClient> TFutureType;
+        //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
+        //    typedef typename TClient1::SharedResponse TClient;
+        //    typedef typename  std::shared_future<TClient> TFutureType;
 
 
 public:
@@ -142,9 +142,9 @@ template<typename TFuture, typename TReturnDataType>
 class TicketFuture  : public TicketFutureBase<TFuture, TReturnDataType>
 {
 
-    //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
-    //    typedef typename TClient1::SharedResponse TClient;
-    //    typedef typename  std::shared_future<TClient> TFutureType;
+        //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
+        //    typedef typename TClient1::SharedResponse TClient;
+        //    typedef typename  std::shared_future<TClient> TFutureType;
 
 public:
     TicketFuture(TFuture future ) : TicketFutureBase<TFuture, TReturnDataType>(future)//TicketFutureBase<TReturnDataType>(future)
@@ -172,9 +172,9 @@ template<typename TFuture>
 class TicketFuture<TFuture, void>  : public TicketFutureBase<TFuture, void>
 {
 
-    //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
-    //    typedef typename TClient1::SharedResponse TClient;
-    //    typedef typename  std::shared_future<TClient> TFutureType;
+        //    typedef typename rclcpp::Client<TReturnDataType> TClient1;
+        //    typedef typename TClient1::SharedResponse TClient;
+        //    typedef typename  std::shared_future<TClient> TFutureType;
 
 public:
     TicketFuture(TFuture future ) : TicketFutureBase<TFuture, void>(future)//TicketFutureBase<TReturnDataType>(future)
@@ -199,6 +199,82 @@ protected:
 
 
 #ifdef ROS2_PROJECT
+
+
+
+///this is meant to be used for ros tickets that come from services. They have mutex to await the ticket.
+template<typename TFuture, typename TReturnDataType,typename TInterfaceType >
+class TicketFuture_RosService_NONQR : public TicketFutureBase<TFuture, TReturnDataType>
+{
+    //rclcpp::Client<world_i::srv::AddObjectToWorld>::SharedFuture
+    //    typedef typename rclcpp::Client<TInterfaceType>::SharedFuture TClient1;
+    typedef typename rclcpp::Client<TInterfaceType>::SharedFuture TSharedFuture;
+    // typedef typename TInterfaceType::Response::_result_type TReturnResultType;
+    //    typedef typename TClient1::SharedFuture TSharedFuture;
+    //typedef typename TReturnDataType::_result_type TResponseResult;
+
+    //    typedef typename TClient1::SharedResponse TClient;
+    //    typedef typename  std::shared_future<TClient> TFutureType;
+
+public:
+    //    std::function<void(TicketFuture_RosService<TFuture, TReturnDataType, TInterfaceType>*, TSharedFuture)> CallbackToServiceVar =
+    //            std::bind
+    //            (&TicketFuture_RosService<TFuture, TReturnDataType, TInterfaceType>::CallbackToService,this);
+
+    std::function<void(TSharedFuture)> CallbackToServiceVar;
+    //            std::bind
+    //            (&TicketFuture_RosService<TFuture, TReturnDataType, TInterfaceType>::CallbackToService,this);
+
+    TicketFuture_RosService_NONQR( ) : TicketFutureBase<TFuture, TReturnDataType>()//TicketFutureBase<TReturnDataType>(future)
+    {
+        CallbackToServiceVar = [&,this](TSharedFuture inner_future)
+        {
+            //QR_Print("callback for addobjectToWorld recieved");
+            // auto res = inner_future.get()->result;
+            auto res = inner_future.get();
+            this->MutexForTicket.unlock();
+        };
+
+    }
+
+    void SetNewFuture(TFuture future )
+    {
+        this->resultTaskToAwait = future;
+    }
+
+protected:
+
+
+    TReturnDataType _AwaitRequestUntilFinished() override
+    {
+
+            //lock it here. if it passes this, it means the callback for the service unlocked it and the service is complete.
+        QR_Print("locking mutex");
+        this->MutexForTicket.lock();
+        this->MutexForTicket.unlock();
+        QR_Print("unlocking mutex");
+        //{
+        //success so return the result
+        return this->_GetFinalReturnFromFuture();
+
+
+
+    }
+
+    TReturnDataType _GetFinalReturnFromFuture() override
+    {
+        auto df = this->resultTaskToAwait.get();
+        return df;
+    }
+
+};
+
+
+
+
+
+
+
 
 ///this is meant to be used for ros tickets that come from services. They have mutex to await the ticket.
 template<typename TFuture, typename TReturnDataType,typename TInterfaceType >
@@ -303,7 +379,7 @@ public:
         CallbackToServiceVar = [&,this](TSharedFuture inner_future)
         {
             //QR_Print("callback for addobjectToWorld recieved");
-           // auto res = inner_future.get()->result;
+            // auto res = inner_future.get()->result;
             this->MutexForTicket.unlock();
         };
 
