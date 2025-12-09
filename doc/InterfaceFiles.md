@@ -20,6 +20,42 @@ Simple `.msg` interface files correspond to QR events created inside your module
 We’ll use **SomeTestEvent** as the example.
 
 ---
+Here is the code from config for creating 3 different types of interfaces. ros common interface, normal interface, and a composited interface 
+```
+        public static QREventMSGNonQR pointcloud2msg;
+        public static QREventMSG sometestmsg;
+        public static QREventMSG pointcloudTest2msg;
+
+        public static RosTarget rosTarget;
+        public livoxmock()
+        {
+
+               pointcloud2msg = new QREventMSGNonQR("PointCloud2",
+            "livoxmock/lidardata",
+            "#include <sensor_msgs/msg/point_cloud2.hpp>",
+            "sensor_msgs::msg::PointCloud2");
+
+            rosTarget = new RosTarget("sensor_msgs",
+           new List<QREventMSGNonQR>()
+           {
+                pointcloud2msg
+           }); 
+
+            sometestmsg = new QREventMSG("livoxmock", "SomeTestEvent",
+            new FunctionArgs<Int32>("a"),
+            new FunctionArgs<float>("b"));
+
+            
+            pointcloudTest2msg = new QREventMSG("livoxmock", "PointCloudMSGTest",
+            new FunctionArgs<QREventMSGNonQR>(pointcloud2msg, "clouddata"),
+            new FunctionArgs<QREventMSG>(sometestmsg, "testdata"),
+            new FunctionArgs<Int32>("numofpointsfilteredout"));
+
+
+        }
+
+
+```
 
 ## Step 1 — Declare the interface variable outside your constructor
 
