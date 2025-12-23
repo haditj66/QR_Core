@@ -67,7 +67,7 @@ public:
     #else
     template<class TQRSettings>
         //static std::shared_ptr<AONodeType>
-        static void Init_QR_Core(rclcpp::executors::MultiThreadedExecutor* exec, TQRSettings qRSettings, std::string& aoTheName, std::string theSettingFileSelection)
+        static void Init_QR_Core(rclcpp::executors::MultiThreadedExecutor* exec, TQRSettings& qRSettings, std::string& aoTheName, std::string theSettingFileSelection)
     #endif
 #else
     static void Init_QR_Core()

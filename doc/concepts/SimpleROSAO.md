@@ -1,35 +1,6 @@
 # SimpleROS AO  
 These are simple ROS2 AO. They provide an easy way to create ROS2 services and to be able to call those services in a easy way where all ROS2 stuff is abstracted into a simple cpp function call.
 As with any AO, you can also publish and subscribe to messages and set timers.
-
-TableOfContentsForQRCore47896205709769
-
-## Table of Contents
-- [AEROS](https://github.com/haditj66/QR_Core)
-- [Installation](https://github.com/haditj66/QR_Core/blob/master/doc/Installation.md)
-- [Creating an AEROS project](https://github.com/haditj66/QR_Core/blob/master/doc/Creating_an_AERTOS_project.md)
-	- [Creating Targets And Links](https://github.com/haditj66/QR_Core/blob/master/doc/CreatingTargetsAndLinks.md)
-	- [Generate_project](https://github.com/haditj66/QR_Core/blob/master/doc/Generate_project.md)
-	- [Settings Files](https://github.com/haditj66/QR_Core/blob/master/doc/SettingsFiles.md)
-	- [Unit Testing](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/UnitTesting.md)
-	- [Launch Files](https://github.com/haditj66/QR_Core/blob/master/doc/tools/LaunchFiles.md)
-- [AEROS concepts](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_concepts.md) 
-    - [Active Objects (AO)](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/AOs.md) 
-	- [PubSub_Tutorial](https://github.com/haditj66/QR_Core/blob/master/doc/QR_PubSub_Tutorial.md)
-	- [Timers](https://github.com/haditj66/QR_Core/blob/master/doc/QR_Timers.md)
-	- [creating NonQR Target Tutorial](https://github.com/haditj66/QR_Core/blob/master/doc/AEROS_NonQR_Target_Tutorial.md)
-		- [SimpleROSAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SimpleROSAO.md)
-			- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SurrogateAO.md)  
-    - [Timers](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Timers.md)  
-	- [Events/Interfaces](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Events.md)
-    - [Finite State Machine](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/FSM.md)
-    - [Target PC or embedded device](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/Target_PC_Or_Embed.md) 
-- [Example Projects](https://github.com/haditj66/QR_Core/blob/master/doc/Examples.md)
-    - [Example world](https://github.com/haditj66/QR_Core/blob/master/doc/example/world.md)
-    - [Example sometest](https://github.com/haditj66/QR_Core/blob/master/doc/example/sometest.md)
-- [AERTOS Tools](https://github.com/haditj66/QR_Core/blob/master/doc/AERTOS_TOOLS.md)
-    
-TableOfContentsForQRCore47896205709769
  
  
 ## Creating a SimpleROS AO
@@ -87,8 +58,19 @@ Now in the target function of your config file, you can create an instance of th
 TestSimple testSimple = new TestSimple("TestSimple1");
 ```
  
-## writing  code for the AO in application
-After you generate your project, it will have the AO code generated. There will be two files generated.
+## Service Functions 
+You can declare a service function like the following 
+```
+        [ServiceFunction]
+        public int AddTwoNumbers(int a, int b)
+        {
+            return 0;
+        }
+```
+This will be converted to a Ros2 service
+
+
+After you generate your project,   There will be two files generated.
 -TestSimpleNode.hpp
 -TestSimpleNodeSurrogate.h
  You will only be interested in the file TestSimpleNode.hpp . In that file, there will be the service function implementations, you can implement what your service function will do here.
@@ -101,6 +83,34 @@ response->result = request->a+request->b;
 //UserCode_SectionAddTwoNumbers1_end 
  
     }
-```
-NOTE: Only write code in the UserCode_Section of these generated file as it will be overwritten next generate elsewhere in the file. 
  
+  
+
+## Creating Service Functions with QREventSRV
+
+Service functions may return a `QREventSRV` directly. This way of declaring a service function is needed when you want a QREvent or NonQREvent as an argument or return type
+
+```csharp
+[ServiceFunction]
+public QREventSRV FilterPointCloud()
+{
+    return new QREventSRV(
+        "livoxmock",
+        "FilterPointCloud",
+
+        // Return type
+        new FunctionArgs<QREventMSGNonQR>(
+            livoxmock.dataFilteredOutmsg,
+            "output_cloud"
+        ),
+
+        // Request arguments
+        new FunctionArgs<Int32>("num_filtered")
+    );
+}
+```
+
+This generates a ROS service with:
+- Request: `int32 num_filtered`
+- Response: `sensor_msgs/PointCloud2 output_cloud`
+

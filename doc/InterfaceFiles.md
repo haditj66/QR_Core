@@ -10,6 +10,7 @@ It covers:
 4. Composing interface files from other interfaces  
 5. Subscribing to publishers outside your module  
 6. Publishing events outside your module  
+7. Subscribing to Non-QR (raw ROS package) messages  
 
 ---
 
@@ -20,42 +21,44 @@ Simple `.msg` interface files correspond to QR events created inside your module
 We’ll use **SomeTestEvent** as the example.
 
 ---
-Here is the code from config for creating 3 different types of interfaces. ros common interface, normal interface, and a composited interface 
+
+Here is the code from config for creating 3 different types of interfaces:  
+(1) ROS common interface,  
+(2) normal interface,  
+(3) composite interface:
+
+```csharp
+public static QREventMSGNonQR pointcloud2msg;
+public static QREventMSG sometestmsg;
+public static QREventMSG pointcloudTest2msg;
+
+public static RosTarget rosTarget;
+
+public livoxmock()
+{
+    pointcloud2msg = new QREventMSGNonQR("PointCloud2",
+        "livoxmock/lidardata",
+        "#include <sensor_msgs/msg/point_cloud2.hpp>",
+        "sensor_msgs::msg::PointCloud2");
+
+    rosTarget = new RosTarget("sensor_msgs",
+       new List<QREventMSGNonQR>()
+       {
+            pointcloud2msg
+       }); 
+
+    sometestmsg = new QREventMSG("livoxmock", "SomeTestEvent",
+        new FunctionArgs<Int32>("a"),
+        new FunctionArgs<float>("b"));
+
+    pointcloudTest2msg = new QREventMSG("livoxmock", "PointCloudMSGTest",
+        new FunctionArgs<QREventMSGNonQR>(pointcloud2msg, "clouddata"),
+        new FunctionArgs<QREventMSG>(sometestmsg, "testdata"),
+        new FunctionArgs<Int32>("numofpointsfilteredout"));
+}
 ```
-        public static QREventMSGNonQR pointcloud2msg;
-        public static QREventMSG sometestmsg;
-        public static QREventMSG pointcloudTest2msg;
 
-        public static RosTarget rosTarget;
-        public livoxmock()
-        {
-
-               pointcloud2msg = new QREventMSGNonQR("PointCloud2",
-            "livoxmock/lidardata",
-            "#include <sensor_msgs/msg/point_cloud2.hpp>",
-            "sensor_msgs::msg::PointCloud2");
-
-            rosTarget = new RosTarget("sensor_msgs",
-           new List<QREventMSGNonQR>()
-           {
-                pointcloud2msg
-           }); 
-
-            sometestmsg = new QREventMSG("livoxmock", "SomeTestEvent",
-            new FunctionArgs<Int32>("a"),
-            new FunctionArgs<float>("b"));
-
-            
-            pointcloudTest2msg = new QREventMSG("livoxmock", "PointCloudMSGTest",
-            new FunctionArgs<QREventMSGNonQR>(pointcloud2msg, "clouddata"),
-            new FunctionArgs<QREventMSG>(sometestmsg, "testdata"),
-            new FunctionArgs<Int32>("numofpointsfilteredout"));
-
-
-        }
-
-
-```
+---
 
 ## Step 1 — Declare the interface variable outside your constructor
 
@@ -120,11 +123,11 @@ return new List<ROSPublisher>()
 
 Example:
 
-If AO instance is `livoxMockedDriver`:
+If AO instance name = `livoxMockedDriver`:
 
 ```
-pub1, true  → livoxMockedDriver/lidardata  
-pub1, false → lidardata  
+true  →  livoxMockedDriver/lidardata  
+false → lidardata  
 ```
 
 ---
@@ -220,7 +223,7 @@ int32 numofpointsfilteredout
 
 # 5. Subscribing to Publishers Outside Your Module
 
-To subscribe to a publisher defined in **another module**, you must use the **4-argument overload**:
+To subscribe to a publisher defined in **another module**, use the **4-argument overload**:
 
 ```csharp
 ROSSubscriber.CreateSubscriber<TAOClass>(
@@ -233,19 +236,19 @@ ROSSubscriber.CreateSubscriber<TAOClass>(
 
 ---
 
-## Meaning of Arguments
+## Explanation of Arguments
 
-| Parameter | Meaning |
-|----------|---------|
-| `TAOClass` | AO class that *owns* the publisher |
-| `subscriberName` | Name of subscriber in *your* module |
-| `publisherName` | Name used in the publisher's AO |
-| `eventMsg` | Interface definition of the message |
-| `instanceNameOfAO` | The AO instance being subscribed to |
+| Argument | Meaning |
+|---------|---------|
+| `TAOClass` | AO that *owns* the publisher you subscribe to |
+| `subscriberName` | Your local subscriber name |
+| `publisherName` | Name used in the publisher AO |
+| `eventMsg` | Interface describing the message |
+| `instanceNameOfAO` | The AO instance publishing the event |
 
 ---
 
-## Example from the `interfacetest` module
+## Example
 
 ```csharp
 ROSSubscriber.CreateSubscriber<livoxmockProject.LivoxMockedDriver>(
@@ -263,27 +266,79 @@ ROSSubscriber.CreateSubscriber<livoxmockProject.LivoxMockedDriver>(
 );
 ```
 
-Explanation:
-
-- You are inside module **interfacetest**
-- Subscribing to events published by **livoxmock**
-- From the AO instance `"livoxMockedDriver"`
-
 ---
 
 # 6. Publishing Events Outside Your Module
 
-If you want your module to publish an event that *belongs to another module*, simply reference it.
-
-### Example
+To publish an event that belongs to another module, simply reference its interface:
 
 ```csharp
 ROSPublisher.CreatePublisher("pub2", livoxmockProject.livoxmock.sometestmsg, false);
 ```
 
-Now **interfacetest** publishes an event type belonging to **livoxmock**.
+Your module now publishes an event defined inside **livoxmock**.
 
-Subscribers anywhere can subscribe normally.
+Subscribers may subscribe normally.
+
+---
+
+# 7. Subscribing to Non-QR (Raw ROS) Messages
+
+This section explains how to subscribe to ROS messages that **do not come from QR modules**  
+(e.g., Livox drivers, external ROS drivers, non-QR nodes).
+
+Use:
+
+```csharp
+ROSSubscriber.CreateSubscriberNonQR(string subscriberName, QREventMSGNonQR interfaceMsg);
+```
+
+---
+
+## Example Configuration
+
+### Step 1 — Define the NonQR message interface
+
+```csharp
+public static QREventMSGNonQR lidar_realPubbeddata;
+
+public livoxmock()
+{
+    lidar_realPubbeddata = new QREventMSGNonQR(
+        "PointCloud2",                   // logical interface name
+        "/livox/lidar",                  // external ROS topic name
+        "#include \"sensor_msgs/msg/point_cloud2.hpp\"",
+        "sensor_msgs::msg::PointCloud2"  // full C++ type
+    );
+}
+```
+
+---
+
+### Step 2 — Subscribe to the NonQR message
+
+```csharp
+ROSSubscriber.CreateSubscriberNonQR(
+    "realDatasub",
+    livoxmock.lidar_realPubbeddata
+);
+```
+
+---
+
+## Explanation
+
+| Parameter | Meaning |
+|----------|---------|
+| `"realDatasub"` | Name of subscriber inside your AO |
+| `lidar_realPubbeddata` | The QREventMSGNonQR describing the external ROS message |
+
+This allows your QR node to subscribe directly to **any ROS topic** published outside QR,
+as long as you specify the correct:
+
+- topic name  
+- header include  
+- full message type  
 
 ---
 
@@ -295,8 +350,11 @@ Subscribers anywhere can subscribe normally.
 | Create ROS-based `.msg` | `QREventMSGNonQR` |
 | Publisher creation | `ROSPublisher.CreatePublisher()` |
 | Subscriber creation | `ROSSubscriber.CreateSubscriber()` |
-| Subscribe to other modules | 4-argument overload |
-| Publish cross-module | Use interface from another module |
+| Subscribe cross-module | 4-argument overload |
+| Publish cross-module | Use interface from other module |
+| Subscribe to external ROS messages | `CreateSubscriberNonQR()` |
 
 ---
+
+# End of Guide
 

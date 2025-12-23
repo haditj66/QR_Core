@@ -15,7 +15,7 @@ TableOfContentsForQRCore47896205709769
     - [Interface files](https://github.com/haditj66/QR_Core/blob/master/doc/InterfaceFiles.md)
 	- [PubSub_Tutorial](https://github.com/haditj66/QR_Core/blob/master/doc/QR_PubSub_Tutorial.md)
 	- [Timers](https://github.com/haditj66/QR_Core/blob/master/doc/QR_Timers.md)
-	- [SimpleROSAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SimpleROSAO.md)
+	- [SimpleROSAO and Service functions](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SimpleROSAO.md)
 	- [SurrogateAO](https://github.com/haditj66/QR_Core/blob/master/doc/concepts/SurrogateAO.md)  
 	- [creating NonQR Target Tutorial](https://github.com/haditj66/QR_Core/blob/master/doc/AEROS_NonQR_Target_Tutorial.md)
 - [Example Projects](https://github.com/haditj66/QR_Core/blob/master/doc/Examples.md)
